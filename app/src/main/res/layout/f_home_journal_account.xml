@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@color/com_background_color"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <pri.zxw.library.view.TitleBar
+        xmlns:titleBarStyle="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/f_home_journal_account_title_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        titleBarStyle:text="流水"
+        titleBarStyle:right_text="记一笔"
+        titleBarStyle:left_visibility="gone"  />
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/f_home_journal_account_lv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+</LinearLayout>
