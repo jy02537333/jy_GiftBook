@@ -633,6 +633,8 @@ public class User extends BaseEntity implements Cloneable {
         String signStr = null;
         try {
            // String pwdStr = md5EncodeTool.encryption(loginpassword, MD5EncodeTool.ENCRYPT_KEY);
+            if(!isExists())
+                return null;
             String pwdStr = Base64Tools.getBase64(loginpassword);
             StringBuilder sb = new StringBuilder("{\"loginname\":\"");
             sb.append(loginname);
@@ -678,6 +680,16 @@ public class User extends BaseEntity implements Cloneable {
         return false;
     }
 
+    /**
+     * 判断用户是否存在
+     * @return
+     */
+    public boolean isExists()
+    {
+        if(loginpassword==null||loginpassword.trim().length()==0)
+            return false;
+        return true;
+    }
     public void saveUser() {
         try {
             Gson gson = new Gson();

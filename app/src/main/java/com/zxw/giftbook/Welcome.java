@@ -120,7 +120,7 @@ public class Welcome extends MyBaseActivity {
 	}
 	/**转到首页*/
 	private void redirectTo() {
-		if(!FtpApplication.user.isLogin(this))
+		if(FtpApplication.user==null||!FtpApplication.user.isLogin(this))
 		{
 			startActivity(new Intent(getApplicationContext(),
 					LoginAct.class));

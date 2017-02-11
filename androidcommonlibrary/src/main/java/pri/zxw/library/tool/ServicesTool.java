@@ -308,6 +308,8 @@ public class ServicesTool {
 					if (map.get(JsonParse.STATUS).equals("1")) {
 						msg.arg1 = 1;
 					}
+					if(map.get(JsonParse.CONTEXT).equals("null"))
+						map.put(JsonParse.CONTEXT,"");
 					msg.obj = map;
 				} else
 					msg.arg2 = AppConstantError.WEBSEVICE_SOAP_FAULT;

@@ -58,21 +58,24 @@ public class LoginUserInfoHandlerTool {
 	 * 用户登录后反馈一些用户信息
 	 * 
 	 * @param msg
-	 *            是否分布提交
 	 */
 	public User loginedHandler(Message msg,String pwd) {
 		Gson gson=new Gson();
 		try {
-			JSONObject jsonArray=new JSONObject(msg.obj.toString());
-		JSONObject tokenJson=(JSONObject) jsonArray.get("data");
-		String token=	tokenJson.getString("token");
-		String userJson=tokenJson.getString("obj");
-			Type type=new TypeToken<User>(){}.getType();
-		 user=	gson.fromJson(userJson,type);
-			user.setLoginpassword(pwd);
-			user.setToken(token);
-			user.saveUser();
-			FtpApplication.user=user;
+			Map<String, String> map = (Map<String, String>) msg.obj;
+			if(map.get(JsonParse.STATUS).equals("1")) {
+				JSONObject jsonArray = new JSONObject(map.get(JsonParse.CONTEXT));
+				//JSONObject tokenJson=(JSONObject) jsonArray.get("data");
+				String token = jsonArray.getString("token");
+				String userJson = jsonArray.getString("obj");
+				Type type = new TypeToken<User>() {
+				}.getType();
+				user = gson.fromJson(userJson, type);
+				user.setLoginpassword(pwd);
+				user.setToken(token);
+				user.saveUser();
+				FtpApplication.user = user;
+			}
 		} catch (JSONException e) {
 			e.printStackTrace();
 		}
@@ -101,7 +104,7 @@ public class LoginUserInfoHandlerTool {
 	 */
 	public void loginVerifity(int requestCode, android.os.Handler handler, Activity act, ServicesTool servicesTool){
 		Map<String,String> params=new HashMap<>();
-		if(!FtpApplication.user.isLogin(act)) {
+		if(FtpApplication.user!=null&&FtpApplication.user.isExists()&&!FtpApplication.user.isLogin(act)) {
 			User user = FtpApplication.user.getUser();
 			params.put("info", user.toSignString(act));
 			params.put("loginname", user.getLoginname());

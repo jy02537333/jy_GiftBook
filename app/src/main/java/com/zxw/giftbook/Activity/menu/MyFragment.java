@@ -19,13 +19,18 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.zxw.giftbook.Activity.login.LoginAct;
 import com.zxw.giftbook.FtpApplication;
 import com.zxw.giftbook.R;
+import com.zxw.giftbook.config.ResConstants;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import pri.zxw.library.entity.User;
+import pri.zxw.library.tool.ImageLoadTool;
 import pri.zxw.library.view.CircleImageView;
 import pri.zxw.library.view.TitleBar;
 import pri.zxw.mysetting.MySettingInfo;
@@ -51,6 +56,9 @@ public class MyFragment extends Fragment implements
     private ListView lv;
     private int currentVersion;
     private MysettingAdapter mysettingAdapter;
+    private ImageLoader imageLoader;
+    private DisplayImageOptions options;
+
     /**
      * 登录
      */
@@ -77,11 +85,12 @@ public class MyFragment extends Fragment implements
                              Bundle savedInstanceState) {
         super.onCreateView(inflater, container, savedInstanceState);
         mView = inflater.inflate(R.layout.fragment_tab_my, container, false);
+        initTool();
         initView(mView);
         setUserView();
         addListener();
         initData();
-        initTool();
+
         return mView;
     }
 
@@ -102,9 +111,11 @@ public class MyFragment extends Fragment implements
         List<MySettingInfo> infos=new ArrayList<>();
 //        infos.add(createStore());
 //        infos.add(createInfocation());
+
         infos.add(createSetting());
+        infos.add(createLogout());
         mysettingAdapter=new MysettingAdapter(getActivity(),infos);
-    lv.setAdapter(mysettingAdapter);
+        lv.setAdapter(mysettingAdapter);
     }
 
     /**
@@ -124,11 +135,33 @@ public class MyFragment extends Fragment implements
         });
         return info;
     }
+    /**
+     * 创建退出程序
+     * @return
+     */
+    public MySettingInfo createLogout()
+    {
+        MySettingInfo info=new MySettingInfo();
+        info.setItemIcon(R.mipmap.mysetting);
+        info.setItemName("退出");
+        info.setItemClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(getActivity(), LoginAct.class);
+                FtpApplication.getInstance().getUser().clearUser();
+                startActivity(intent);
+                getActivity().finish();
+            }
+        });
+        return info;
+    }
 
     private void initTool() {
         IntentFilter myIntentFilter = new IntentFilter();
         myIntentFilter.addAction(FragmentMyBroadcast.FRAGMENTMYBROADCAST_UPDATE);
         getActivity().registerReceiver(new FragmentMyBroadcast(), myIntentFilter);
+        imageLoader=ImageLoader.getInstance();
+        options=ImageLoadTool.userHeadImgOptionsInit(options, ResConstants.HEAD_DEFAULT_ID);
     }
 
     private void initData() {
@@ -185,10 +218,12 @@ public class MyFragment extends Fragment implements
             return ;
         User user = FtpApplication.getInstance().getUser();
         if (user!=null) {
+            imageLoader.displayImage(user.getPortraitThumbnail(),userImg,options);
 
+            isLogined = true;
         }else {
             userNameTv.setText("登陆更多精彩");
-            userImg.setImageResource(R.mipmap.not_headimg);
+            userImg.setImageResource( ResConstants.HEAD_DEFAULT_ID);
             genderImg.setVisibility(View.GONE);
             isLogined = false;
         }
