@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
@@ -269,7 +270,8 @@ public class MainAct extends MyBaseActivity {
         ImageView image = (ImageView)rdo.findViewById(R.id.imageview);
         image.setBackgroundResource(imageID);
         TextView text = (TextView)rdo.findViewById(R.id.textview);
-        text.setTextColor(Color.rgb(0x9e, 0x9e, 0x9e));
+        text.setTextColor( //Color.rgb(0x9e, 0x9e, 0x9e));
+        getResources().getColorStateList(R.color.com_tab_font_gray));
     }
 
     private void setSelectStatus(int resID,int imageID)
@@ -282,7 +284,8 @@ public class MainAct extends MyBaseActivity {
         ImageView image = (ImageView)rdo.findViewById(R.id.imageview);
         image.setBackgroundResource(imageID);
         TextView text = (TextView)rdo.findViewById(R.id.textview);
-        text.setTextColor(Color.rgb(0x42, 0xA5, 0xEF));
+       text.setTextColor(//Color.rgb(0x42, 0xA5, 0xEF));
+          getResources().getColorStateList(R.color.com_color1));
     }
 
     private void setHintNum(int resID,boolean show,int num)
