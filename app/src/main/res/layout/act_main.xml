@@ -24,7 +24,7 @@
         android:layout_width="fill_parent"
         android:layout_height="45dp"
         android:paddingTop="2dp"
-        android:background="#cbcbcb"
+        android:background="@color/com_tab_bg_gray2"
         android:orientation="horizontal" >
 
         <LinearLayout
@@ -50,7 +50,6 @@
             android:layout_width="0dp"
             android:layout_height="fill_parent"
             android:layout_weight="1"
-            android:visibility="gone"
             android:gravity="center"
             android:orientation="vertical" >
 
@@ -61,7 +60,6 @@
             android:layout_height="fill_parent"
             android:layout_weight="1"
             android:gravity="center"
-            android:visibility="gone"
             android:orientation="vertical" >
 
         </LinearLayout>

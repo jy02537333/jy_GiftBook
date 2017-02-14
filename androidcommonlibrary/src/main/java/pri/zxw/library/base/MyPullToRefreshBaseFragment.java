@@ -22,6 +22,8 @@ extends BaseFragment implements PullToRefreshBase.OnRefreshListener2
 ,MyPullToRefreshBaseInterface{
 	public static final int GET_DATA_CODE=1111;
 	public static final int GET_ADD_CODE=2222;
+	/**添加子级**/
+	public static final int ADD_CHILD_CODE=9494;
 	public static final int LOAD_CODE=3333;
 	public static final int DEL_CODE=3333;
 	protected static final int PAGE_SIZE = 10; // 页面大小

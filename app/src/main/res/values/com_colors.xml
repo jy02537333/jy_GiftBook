@@ -6,6 +6,10 @@
     <color name="com_color1">#ef5453</color>
     <!-- 主页面背景灰色 -->
     <color name="com_act_gray">#fafafa</color>
+    <!-- 选项卡字体灰色 -->
+    <color name="com_tab_font_gray">#cccccc</color>
+    <!-- 选项卡背景灰色 -->
+    <color name="com_tab_bg_gray2">#eaeaea</color>
     <!-- 编辑框边框灰色 -->
     <color name="com_edit_border_gray">#e5e5e5</color>
     <!-- 提交按钮颜色 -->

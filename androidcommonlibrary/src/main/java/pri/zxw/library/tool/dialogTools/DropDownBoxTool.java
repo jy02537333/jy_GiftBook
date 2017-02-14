@@ -16,6 +16,11 @@ import pri.zxw.library.constant.HandlerStatus;
  */
 public class DropDownBoxTool {
 
+	public final void showDialog(final String title,
+								 final TreeMap<String, String> map, final int type, Activity act,
+								 final TextView view, final Callback callback) {
+		showDialog(title,map, type,  act, view, callback, null);
+	}
 	/**
 	 * 
 	 * @param title
@@ -25,9 +30,9 @@ public class DropDownBoxTool {
 	 *            key 值 作为判断 当一个页面有多个下拉需要处理时方便使用
 	 */
 	public final void showDialog(final String title,
-			final TreeMap<String, String> map, final int type, Activity act,
-			final TextView view,final Callback callback) {
-		DialogSheetzAction dialog1 = new DialogSheetzAction(act).builder();
+								 final TreeMap<String, String> map, final int type, Activity act,
+								 final TextView view, final Callback callback, DialogSheetzAction.CanelCallback canelCallback) {
+		DialogSheetzAction dialog1 = new DialogSheetzAction(act,canelCallback).builder();
 		dialog1.setTitle(title);
 		dialog1.setCancelable(false);
 		dialog1.setCanceledOnTouchOutside(false);
@@ -45,10 +50,12 @@ public class DropDownBoxTool {
 						public void onClick(int which) {
 							switch (type) {
 							case HandlerStatus.KEY1:
-								view.setText(name);
-								view.setTag(key);
-								if(callback!=null)
-								callback.complate(key,name);
+								if(view!=null) {
+									view.setText(name);
+									view.setTag(key);
+								}
+									if (callback != null)
+										callback.complate(key, name);
 								break;
 							default:
 								break;

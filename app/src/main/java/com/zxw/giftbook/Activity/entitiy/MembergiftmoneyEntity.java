@@ -28,7 +28,7 @@ public class MembergiftmoneyEntity extends BaseEntity implements java.io.Seriali
 	/**金额*/
 	private String money;
 	/**支出类型编号*/
-	private Integer expendituretype;
+	private String expendituretype;
 	/**支出类型名称*/
 	private String expendituretypename;
 	/**状态(0=删除，1正常)*/
@@ -125,7 +125,7 @@ public class MembergiftmoneyEntity extends BaseEntity implements java.io.Seriali
 	 *方法: 取得java.lang.Integer
 	 *@return: java.lang.Integer  支出类型编号
 	 */
-	public Integer getExpendituretype(){
+	public String getExpendituretype(){
 		return this.expendituretype;
 	}
 
@@ -133,7 +133,7 @@ public class MembergiftmoneyEntity extends BaseEntity implements java.io.Seriali
 	 *方法: 设置java.lang.Integer
 	 *@param: java.lang.Integer  支出类型编号
 	 */
-	public void setExpendituretype(Integer expendituretype){
+	public void setExpendituretype(String expendituretype){
 		this.expendituretype = expendituretype;
 	}
 	/**

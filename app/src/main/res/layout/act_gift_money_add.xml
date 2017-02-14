@@ -21,13 +21,14 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-        <EditText
-            android:id="@+id/act_gift_money_add_name_edit"
+        <TextView
+            android:id="@+id/act_gift_money_add_name_tv"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:background="@android:drawable/edit_text"
             android:hint="收礼人"
+            android:textColorHint="@color/com_hint_font_gray_color"
             android:inputType="text"
             android:maxLength="10" />
             <TextView
@@ -40,7 +41,7 @@
                 android:layout_marginRight="10dp"
                 android:padding="3dp"
                 android:textColor="@color/com_base_btn_color"
-                android:textColorHint="@color/com_hint_font_gray_color"
+                android:visibility="gone"
                 android:text="选择收礼人"/>
         </RelativeLayout>
         <EditText
@@ -79,8 +80,7 @@
                 android:layout_marginRight="1dp"
                 android:padding="3dp"
                 android:textColor="@color/com_base_btn_color"
-                android:textColorHint="@color/com_hint_font_gray_color"
-                android:hint="添加送礼类型" />
+                android:text="添加送礼类型" />
             <ImageView
                 android:layout_centerVertical="true"
                 android:layout_toLeftOf="@+id/act_gift_money_add_type_add_tv"

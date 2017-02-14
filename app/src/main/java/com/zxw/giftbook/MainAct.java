@@ -116,7 +116,7 @@ public class MainAct extends MyBaseActivity {
     }
 
     private void initData() {
-        radioCanelCheck(R.id.a_main_one_lay, R.mipmap.home_p);
+        radioCanelCheck(R.id.a_main_one_lay, R.mipmap.tab_gift_give_p);
     }
 
     /**
@@ -135,10 +135,11 @@ public class MainAct extends MyBaseActivity {
         getFragmentManager().beginTransaction()
                 .replace(R.id.main_content, homeFragment).commit();
 
-        getTabItem((LinearLayout) findViewById(R.id.a_main_one_lay),"流水帐");
-        getTabItem((LinearLayout)findViewById(R.id.a_main_two_lay),"亲友团");
-        getTabItemImage((LinearLayout) findViewById(R.id.a_main_center_lay));
-        getTabItem((LinearLayout)findViewById(R.id.a_main_shree_lay),"项目");
+        getTabItem((LinearLayout) findViewById(R.id.a_main_one_lay),"送礼");
+        getTabItem((LinearLayout)findViewById(R.id.a_main_two_lay),"收礼");
+        getTabItem((LinearLayout)findViewById(R.id.a_main_center_lay),"金融超市");
+       // getTabItemImage((LinearLayout) findViewById(R.id.a_main_center_lay));
+        getTabItem((LinearLayout)findViewById(R.id.a_main_shree_lay),"亲友");
         getTabItem((LinearLayout)findViewById(R.id.a_main_four_lay),"我");
         //首页
         findViewById(R.id.a_main_one_lay).setOnClickListener(new OnClickListener()
@@ -147,7 +148,7 @@ public class MainAct extends MyBaseActivity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 int id = v.getId();
-                radioCanelCheck(id, R.mipmap.home_p);
+                radioCanelCheck(id, R.mipmap.tab_gift_give_p);
                 if (homeFragment == null)
                 {
                     homeFragment = new HomeFragment();
@@ -162,7 +163,7 @@ public class MainAct extends MyBaseActivity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 int id = v.getId();
-                radioCanelCheck(id, R.mipmap.object_p);
+                radioCanelCheck(id, R.mipmap.tab_receive_p);
                 if (povertyObjectFragment == null)
                 {
                     povertyObjectFragment = new SidekickerGroupFragment();
@@ -171,28 +172,28 @@ public class MainAct extends MyBaseActivity {
             }
         });
         //中间按钮
-        findViewById(R.id.a_main_shree_lay).setOnClickListener(new OnClickListener()
+        findViewById(R.id.a_main_center_lay).setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
-//                int id = v.getId();
-//                radioCanelCheck(id,0);
-//                if (publishFragment == null)
-//                {
-//                    publishFragment = new PublishFragment();
-//                }
-//                switchContent(mContent, publishFragment);
+                int id = v.getId();
+                radioCanelCheck(id, R.mipmap.tab_financial_p);
+                if (povertyObjectFragment == null)
+                {
+                    povertyObjectFragment = new SidekickerGroupFragment();
+                }
+                switchContent(mContent, povertyObjectFragment);
             }
         });
-        //消息
+        //亲友团
         findViewById(R.id.a_main_shree_lay).setOnClickListener(new OnClickListener()
         {
             @Override
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 int id = v.getId();
-                radioCanelCheck(id, R.mipmap.items_p);
+                radioCanelCheck(id, R.mipmap.tab_sidekicker_group_p);
                 if (itemsFragment == null)
                 {
                     itemsFragment = new ItemsFragment();
@@ -207,7 +208,7 @@ public class MainAct extends MyBaseActivity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 int id = v.getId();
-                radioCanelCheck(id, R.mipmap.mysetting_p);
+                radioCanelCheck(id, R.mipmap.tab_my_p);
                 if (myFragment == null)
                 {
                     myFragment = new MyFragment();
@@ -219,11 +220,12 @@ public class MainAct extends MyBaseActivity {
 
     private void radioCanelCheck(int layoutId,int imageId)
     {
-        setNormalStatus(R.id.a_main_one_lay, R.mipmap.home);
-        setNormalStatus(R.id.a_main_two_lay, R.mipmap.object);
+        setNormalStatus(R.id.a_main_one_lay, R.mipmap.tab_gift_give);
+        setNormalStatus(R.id.a_main_two_lay, R.mipmap.tab_receive);
+        setNormalStatus(R.id.a_main_center_lay, R.mipmap.tab_financial);
 //        setNormalStatus(R.id.a_main_one_lay, R.mipmap.burst_l);
-        setNormalStatus(R.id.a_main_shree_lay, R.mipmap.items);
-        setNormalStatus(R.id.a_main_four_lay, R.mipmap.mysetting);
+        setNormalStatus(R.id.a_main_shree_lay, R.mipmap.tab_sidekicker_group);
+        setNormalStatus(R.id.a_main_four_lay, R.mipmap.tab_my);
         setSelectStatus(layoutId, imageId);
 
 //		try {

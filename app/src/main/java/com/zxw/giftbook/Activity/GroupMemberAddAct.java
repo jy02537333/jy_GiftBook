@@ -34,8 +34,10 @@ import pri.zxw.library.base.MyBaseActivity;
 import pri.zxw.library.listener.TitleOnClickListener;
 import pri.zxw.library.tool.JsonParse;
 import pri.zxw.library.tool.MessageHandlerTool;
+import pri.zxw.library.tool.ProgressDialogTool;
 import pri.zxw.library.tool.ServicesTool;
 import pri.zxw.library.tool.ToastShowTool;
+import pri.zxw.library.tool.dialogTools.DialogSheetzAction;
 import pri.zxw.library.tool.dialogTools.DropDownBoxTool;
 import pri.zxw.library.view.TitleBar;
 
@@ -67,10 +69,14 @@ public class GroupMemberAddAct extends MyBaseActivity {
             typeTv,typeAddTv;
     EditText nameEdit;
     EditText phoneEdit;
+    /**当前选择的组*/
     String typeId,typeName;
     Button submitBtn;
     boolean isAddAffiliated=false;
-
+    /**
+     * 是否获取组成员中
+     */
+    boolean isGetGroupMembering=false;
     Handler mHandler=new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -121,8 +127,11 @@ public class GroupMemberAddAct extends MyBaseActivity {
                         showGroupMember();
                     } catch (Exception e) {
                     }
-                }
+                }else
+                ToastShowTool.myToastShort(GroupMemberAddAct.this,"该组下没人！");
+                isGetGroupMembering=false;
             }
+            ProgressDialogTool.getInstance(GroupMemberAddAct.this).dismissDialog();
         }
     };
     @Override
@@ -162,12 +171,6 @@ public class GroupMemberAddAct extends MyBaseActivity {
     }
     public void initListener()
     {
-        titleBar.setLeftClickListener(new TitleOnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onBackPressed();
-            }
-        });
         titleBar.setLeftClickListener(new TitleOnClickListener() {
             @Override
             public void onClick(View view) {
@@ -241,6 +244,7 @@ public class GroupMemberAddAct extends MyBaseActivity {
 
     public void getDropDownData()
     {
+        ProgressDialogTool.getInstance(this).showDialog("加载中...");
         Map<String,String > params= ComParamsAddTool.getParam();
         params.put("userid", FtpApplication.user.getId());
         mServicesTool.doPostAndalysisData("apiAllTypeCtrl.do?getAll",params,GET_DATA_CODE);
@@ -257,26 +261,42 @@ public class GroupMemberAddAct extends MyBaseActivity {
                     }
                 });
     }
+
+
     public void showGroup()
     {
+        if(isGetGroupMembering)
+            return ;
+        isGetGroupMembering=true;
         DropDownBoxTool tool = new DropDownBoxTool();
-        tool.showDialog("选选关联人分组", sidekickerGroups, 1,
+        tool.showDialog("选择关联人分组", sidekickerGroups, 1,
                 this, affiliated_personTv, new DropDownBoxTool.Callback() {
                     @Override
                     public void complate(String key, String value) {
+                        affiliated_personTv.setText("");
                         affiliatedGroup=key;
                         Map<String,String > params= ComParamsAddTool.getParam();
                         params.put("userid", FtpApplication.user.getId());
-                        params.put("groupid", affiliatedGroup);
-                        mServicesTool.doPostAndalysisData("apiAllTypeCtrl.do?getGroupMember",params,GET_GROUP_MEMBER_CODE);
+                        params.put("gourpid", affiliatedGroup);
+                        ProgressDialogTool.getInstance(GroupMemberAddAct.this).showDialog("获取关联人");
+                        mServicesTool.doPostAndalysisData("apiGroupmemberCtrl.do?datagrid",params,GET_GROUP_MEMBER_CODE);
+                    }
+                }, new DialogSheetzAction.CanelCallback() {
+                    @Override
+                    public void canelCallback() {
+                        isGetGroupMembering=false;
                     }
                 });
     }
     public void showGroupMember()
     {
         DropDownBoxTool tool = new DropDownBoxTool();
-        tool.showDialog("选选关联人", groupmembers, 1,
-                this, affiliated_personTv,null);
+        tool.showDialog("选择关联人", groupmembers, 1,
+                this, affiliated_personTv, new DropDownBoxTool.Callback() {
+                    @Override
+                    public void complate(String key, String value) {
+                    }
+                });
     }
 
 }

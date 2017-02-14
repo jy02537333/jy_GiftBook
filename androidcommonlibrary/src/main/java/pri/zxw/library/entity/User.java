@@ -10,7 +10,9 @@ import pri.zxw.library.base.BaseEntity;
 import pri.zxw.library.db.JsonStrHistoryDao;
 import pri.zxw.library.tool.DeviceTool;
 import pri.zxw.library.tool.base64.Base64Tools;
+import pri.zxw.library.tool.base64.Base64Utils;
 import pri.zxw.library.tool.base64.MD5EncodeTool;
+import pri.zxw.library.tool.base64.RSAEncrypt;
 
 /**
  * @author 张相伟
@@ -644,8 +646,9 @@ public class User extends BaseEntity implements Cloneable {
             sb.append(System.currentTimeMillis());
             sb.append("\",\"decvices\":\"");
             sb.append(DeviceTool.getDeviceId(context) + "\"}");
-            signStr=Base64Tools.getBase64(sb.toString());
-        //    signStr = md5EncodeTool.encryption(signStr, MD5EncodeTool.LOGIN_ENCRYPT_KEY);
+
+             signStr=Base64Tools.getBase64(sb.toString());
+         //   signStr = md5EncodeTool.encryption(signStr, MD5EncodeTool.LOGIN_ENCRYPT_KEY);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -150,7 +150,7 @@ public class SidekickerGroupAdapter extends MyBaseAdapter {
 
 
     /**
-     * 修改昵称
+     * 添加分类
      */
     private void showAddView() {
         final MyAlertDialog.MyBuilder dialog1 = new MyAlertDialog.MyBuilder(
@@ -164,8 +164,9 @@ public class SidekickerGroupAdapter extends MyBaseAdapter {
         final EditText editText = (EditText) dialog_view
                 .findViewById(R.id.nickname_edit_aty_editor);
         editText.setTextColor(mContext.getResources().getColor(R.color.font_com_content_black_color));
+        editText.setHintTextColor(mContext.getResources().getColor(R.color.com_hint_font_gray_color));
         editText.setHint("输入分类");
-        editText.addTextChangedListener(new TxtLengthRestrictTool(editText, 10));
+        editText.addTextChangedListener(new TxtLengthRestrictTool(editText, 20));
         editText.setSelection(editText.getText().length());
         dialog1.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override

@@ -28,6 +28,7 @@ import java.util.List;
 import java.util.Map;
 
 import pri.zxw.library.base.MyPullToRefreshBaseFragment;
+import pri.zxw.library.db.JsonStrHistoryDao;
 import pri.zxw.library.tool.MessageHandlerTool;
 import pri.zxw.library.tool.ServicesTool;
 import pri.zxw.library.view.TitleBar;
@@ -54,24 +55,30 @@ public class SidekickerGroupFragment extends MyPullToRefreshBaseFragment {
             super.handleMessage(msg);
             if(msg.what==GET_DATA_CODE)
             {
+
                 MessageHandlerTool messageHandlerTool=new MessageHandlerTool();
                 Type type=new TypeToken<List<SidekickergroupEntity>>(){}.getType();
                 List<SidekickergroupEntity> list=( List<SidekickergroupEntity>)messageHandlerTool.handlerObject(msg,type,getActivity());
                 if(list==null||list.size()==0) {
                     list=new ArrayList<>();
+                }else if(list.size()>0)
+                {
+                    JsonStrHistoryDao dao=new JsonStrHistoryDao();
+                    dao.addCache("sidekickerGroup",messageHandlerTool.jsonStr);
                 }
-                SidekickergroupEntity entity=new SidekickergroupEntity();
-                entity.setId("");
-                entity.setGroupname("添加分组");
-                entity.setAddType(1);
-                list.add(entity);
-                SidekickergroupEntity entity2=new SidekickergroupEntity();
-                entity2.setId("");
-                entity2.setAddType(2);
-                entity2.setGroupname("添加亲友");
-                list.add(entity2);
-                addEmpty(list);
-                adapter.addDataAll(list);
+                handlerData( list);
+//                SidekickergroupEntity entity=new SidekickergroupEntity();
+//                entity.setId("");
+//                entity.setGroupname("添加分组");
+//                entity.setAddType(1);
+//                list.add(entity);
+//                SidekickergroupEntity entity2=new SidekickergroupEntity();
+//                entity2.setId("");
+//                entity2.setAddType(2);
+//                entity2.setGroupname("添加亲友");
+//                list.add(entity2);
+//                addEmpty(list);
+//                adapter.addDataAll(list);
                 isData=false;
             }else if(msg.what==GET_ADD_CODE)
             {
@@ -115,6 +122,14 @@ public class SidekickerGroupFragment extends MyPullToRefreshBaseFragment {
                 getWebData();
             }
         }, 1000);
+        Gson gson=new Gson();
+        JsonStrHistoryDao dao=new JsonStrHistoryDao();
+        String str=dao.getCache("sidekickerGroup");
+        if(str!=null&&str.trim().length()>0) {
+            Type type = new TypeToken<List<SidekickergroupEntity>>() {            }.getType();
+            List<SidekickergroupEntity> list=  gson.fromJson(str, type);
+            handlerData(list);
+        }
        // listLoad(mHandler);
         return view;
     }
@@ -191,6 +206,21 @@ public class SidekickerGroupFragment extends MyPullToRefreshBaseFragment {
         params.put("rows","100");
         params.put("userid", FtpApplication.getInstance().getUser().getId());
         mServicesTool.doPostAndalysisData("apiSidekickergroupCtrl.do?datagrid",params,GET_DATA_CODE);
+    }
+    private void handlerData(List<SidekickergroupEntity> list)
+    {
+                        SidekickergroupEntity entity=new SidekickergroupEntity();
+                entity.setId("");
+                entity.setGroupname("添加分组");
+                entity.setAddType(1);
+                list.add(entity);
+                SidekickergroupEntity entity2=new SidekickergroupEntity();
+                entity2.setId("");
+                entity2.setAddType(2);
+                entity2.setGroupname("添加亲友");
+                list.add(entity2);
+                addEmpty(list);
+                adapter.addDataAll(list);
     }
 
     @Override

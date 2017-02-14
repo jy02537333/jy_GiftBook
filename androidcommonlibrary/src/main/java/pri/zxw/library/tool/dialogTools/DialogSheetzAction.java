@@ -29,10 +29,15 @@ public final class DialogSheetzAction {
 	private LinearLayout lLayout_content;
 	private ScrollView sLayout_content;
 	private boolean showTitle = false;
+	private CanelCallback mCanelCallback;
 	private List<SheetItem> sheetItemList;
 
 	public DialogSheetzAction(Activity activity) {
 		this.activity = activity;
+	}
+	public DialogSheetzAction(Activity activity,CanelCallback canelCallback) {
+		this.activity = activity;
+		mCanelCallback=canelCallback;
 	}
 
 	public DialogSheetzAction builder() {
@@ -51,6 +56,8 @@ public final class DialogSheetzAction {
 			@Override
 			public void onClick(View v) {
 				dialog.dismiss();
+				if(mCanelCallback!=null)
+					mCanelCallback.canelCallback();
 			}
 		});
 
@@ -219,5 +226,8 @@ public final class DialogSheetzAction {
 	//下拉菜单的单击事件
 	public interface ISpinner{
 		void click();
+	}
+	public interface CanelCallback{
+		public void canelCallback();
 	}
 }

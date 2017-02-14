@@ -38,6 +38,7 @@ public class MessageHandlerTool {
 	public static final int HASH_VALUE = 1;
 	public static final int ERROR = -1;
 	public static final int END = 2;
+	public String jsonStr;
 	/**
 	 * 是否网络方面错误
 	 */
@@ -79,6 +80,7 @@ public class MessageHandlerTool {
                     String status = map.get(JsonParse.STATUS);
                         if (status.equals("1")) {
                             String data=map.get(JsonParse.CONTEXT);
+							this.jsonStr=data;
                             Object retObj = gson.fromJson(data, type);
                             return retObj;
                         }

@@ -47,6 +47,7 @@ public class GroupMemberAct extends MyPullToRefreshBaseActivity {
     TitleBar titleBar;
     ListViewEmptyView emptyView;
     String id,groupName;
+    double tatolMoney=0,itemMoney=0;
     public static final String GET_DATA_URL="apiGroupmemberCtrl.do?datagrid";
 
     Handler mHandler=new Handler() {
@@ -57,20 +58,28 @@ public class GroupMemberAct extends MyPullToRefreshBaseActivity {
             {
                 MessageHandlerTool messageHandlerTool=new MessageHandlerTool();
                 Type type=new TypeToken<List<GroupmemberEntity>>(){}.getType();
-             Object msgInfo=   messageHandlerTool.handlerObject(msg,type,GroupMemberAct.this);
-               // MessageHandlerTool.MessageInfo msgInfo = messageHandlerTool.handlerObject(msg,GroupMemberAct.this,mAdapter,listView,type);
+                Object msgInfo=   messageHandlerTool.handlerObject(msg,type,GroupMemberAct.this);
+                // MessageHandlerTool.MessageInfo msgInfo1 =  messageHandlerTool.handler(msg,GroupMemberAct.this,mAdapter,listView,type);
                 if(msgInfo!=null )  //&&msgInfo.getIsHashValue())
                 {
                     List<GroupmemberEntity> list=( List<GroupmemberEntity>)msgInfo;
+                    itemMoney=0;
                     for (GroupmemberEntity item:list)
                     {
                         double amount=0;
                         for(GroupmemberEntity childItem:item.getAffiliatedpersonList())
                         {
                             amount+=childItem.getTotalmoney();
+                            itemMoney+=amount;
                         }
                         item.setAffiliatedpersonidAmount(amount);
                     }
+                    if(mUpfalg)
+                    {
+                        mAdapter.remove();
+                        tatolMoney=0;
+                    }
+                    tatolMoney=tatolMoney+itemMoney;
                     mAdapter.addDataAll(list);
                     mAdapter.notifyDataSetChanged();
                 }
