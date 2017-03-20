@@ -1,5 +1,6 @@
 package pri.zxw.library.tool.dialogTools;
 
+import java.util.Map;
 import java.util.TreeMap;
 
 import android.app.Activity;
@@ -17,7 +18,7 @@ import pri.zxw.library.constant.HandlerStatus;
 public class DropDownBoxTool {
 
 	public final void showDialog(final String title,
-								 final TreeMap<String, String> map, final int type, Activity act,
+								 final Map<String, String> map, final int type, Activity act,
 								 final TextView view, final Callback callback) {
 		showDialog(title,map, type,  act, view, callback, null);
 	}
@@ -30,7 +31,7 @@ public class DropDownBoxTool {
 	 *            key 值 作为判断 当一个页面有多个下拉需要处理时方便使用
 	 */
 	public final void showDialog(final String title,
-								 final TreeMap<String, String> map, final int type, Activity act,
+								 final Map<String, String> map, final int type, Activity act,
 								 final TextView view, final Callback callback, DialogSheetzAction.CanelCallback canelCallback) {
 		DialogSheetzAction dialog1 = new DialogSheetzAction(act,canelCallback).builder();
 		dialog1.setTitle(title);

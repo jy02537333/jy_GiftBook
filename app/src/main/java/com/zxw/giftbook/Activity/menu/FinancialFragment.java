@@ -28,6 +28,7 @@ WebView webView;
     }
    void initView(){
        webView=(WebView)view.findViewById(R.id.f_financial_wv);
+       webView.loadUrl("https://www.libugj.cn/apiFinancialSupermarketController.do?list");
     }
     void  initTool(){
 

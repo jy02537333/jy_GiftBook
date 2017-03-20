@@ -5,8 +5,6 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,13 +21,14 @@ import pri.zxw.library.base.MyBaseActivity;
 import pri.zxw.library.entity.User;
 import pri.zxw.library.tool.AppConstantError;
 import pri.zxw.library.tool.ProgressDialogTool;
-import pri.zxw.library.tool.ServicesTool;
 
+import com.zxw.giftbook.Activity.menu.FinancialFragment;
 import com.zxw.giftbook.Activity.menu.MyFragment;
 import com.zxw.giftbook.Activity.menu.HomeFragment;
-import com.zxw.giftbook.Activity.menu.ItemsFragment;
+import com.zxw.giftbook.Activity.menu.ReceivingGIftFragment;
 import com.zxw.giftbook.Activity.menu.SidekickerGroupFragment;
 import com.zxw.giftbook.config.NetworkConfig;
+import com.zxw.giftbook.utils.AppServerTool;
 import com.zxw.giftbook.utils.ExitTool;
 import com.zxw.giftbook.utils.LoginUserInfoHandlerTool;
 
@@ -44,10 +43,11 @@ public class MainAct extends MyBaseActivity {
     private Activity mActivity;
     private Fragment mContent;
     private HomeFragment homeFragment;
-    private SidekickerGroupFragment povertyObjectFragment;
-    private ItemsFragment itemsFragment;
+    ReceivingGIftFragment receivingGIftFragment;
+    private SidekickerGroupFragment sidekickerGroupFragment;
+    private FinancialFragment financialFragment;
     private MyFragment myFragment;
-    private ServicesTool mServicesTool;
+    private AppServerTool mServicesTool;
     private LoginUserInfoHandlerTool loginUserInfoHandlerTool;
     public static final int USER_VALIDATE_CODE = 7345;
     public static final int USER_COLLECT_CODE = 1345;
@@ -111,7 +111,7 @@ public class MainAct extends MyBaseActivity {
     }
 
     private void initTool() {
-        mServicesTool = new ServicesTool(NetworkConfig.api_url, this, mHandler);
+        mServicesTool = new AppServerTool(NetworkConfig.api_url, this, mHandler);
         loginUserInfoHandlerTool = new LoginUserInfoHandlerTool(mActivity,
                 mServicesTool);
     }
@@ -165,13 +165,14 @@ public class MainAct extends MyBaseActivity {
                 // TODO Auto-generated method stub
                 int id = v.getId();
                 radioCanelCheck(id, R.mipmap.tab_receive_p);
-                if (povertyObjectFragment == null)
+                if (receivingGIftFragment == null)
                 {
-                    povertyObjectFragment = new SidekickerGroupFragment();
+                    receivingGIftFragment = new ReceivingGIftFragment();
                 }
-                switchContent(mContent, povertyObjectFragment);
+                switchContent(mContent, receivingGIftFragment);
             }
         });
+
         //中间按钮
         findViewById(R.id.a_main_center_lay).setOnClickListener(new OnClickListener()
         {
@@ -179,14 +180,16 @@ public class MainAct extends MyBaseActivity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 int id = v.getId();
-                radioCanelCheck(id, R.mipmap.tab_financial_p);
-                if (povertyObjectFragment == null)
+                radioCanelCheck(id, R.mipmap.tab_sidekicker_group_p);
+                if (financialFragment == null)
                 {
-                    povertyObjectFragment = new SidekickerGroupFragment();
+                    financialFragment = new FinancialFragment();
                 }
-                switchContent(mContent, povertyObjectFragment);
+                switchContent(mContent, financialFragment);
             }
         });
+
+
         //亲友团
         findViewById(R.id.a_main_shree_lay).setOnClickListener(new OnClickListener()
         {
@@ -195,11 +198,11 @@ public class MainAct extends MyBaseActivity {
                 // TODO Auto-generated method stub
                 int id = v.getId();
                 radioCanelCheck(id, R.mipmap.tab_sidekicker_group_p);
-                if (itemsFragment == null)
+                if (sidekickerGroupFragment == null)
                 {
-                    itemsFragment = new ItemsFragment();
+                    sidekickerGroupFragment = new SidekickerGroupFragment();
                 }
-                switchContent(mContent, itemsFragment);
+                switchContent(mContent, sidekickerGroupFragment);
             }
         });
         //我的

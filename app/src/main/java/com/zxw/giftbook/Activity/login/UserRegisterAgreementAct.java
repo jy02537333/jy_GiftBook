@@ -1,7 +1,6 @@
 package com.zxw.giftbook.Activity.login;
 
 import pri.zxw.library.listener.TitleOnClickListener;
-import pri.zxw.library.tool.ServicesTool;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -17,6 +16,7 @@ import pri.zxw.library.view.TitleBar;
 
 import com.zxw.giftbook.R;
 import com.zxw.giftbook.config.NetworkConfig;
+import com.zxw.giftbook.utils.AppServerTool;
 
 /**
  * 用户注册协议
@@ -27,7 +27,7 @@ public class UserRegisterAgreementAct extends MyBaseActivity  {
 	private TitleBar titleTv;
 	private boolean isCheck=false;
 	private WebView wv;
-	private ServicesTool mServicesTool;
+	private AppServerTool mServicesTool;
 
 	Handler mHandler=new Handler(){
 		@Override
@@ -56,7 +56,7 @@ public class UserRegisterAgreementAct extends MyBaseActivity  {
 	
 	/** 初始化数据*/
 	private void initTool() {
-		mServicesTool=new ServicesTool(NetworkConfig.api_url,this,  mHandler);
+		mServicesTool=new AppServerTool(NetworkConfig.api_url,this,  mHandler);
 	}
 	
 	/** 初始化布局*/

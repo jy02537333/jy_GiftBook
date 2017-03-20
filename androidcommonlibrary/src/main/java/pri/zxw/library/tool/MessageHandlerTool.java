@@ -2,6 +2,7 @@ package pri.zxw.library.tool;
 
 import java.io.StringReader;
 import java.lang.reflect.Type;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -173,6 +174,7 @@ public class MessageHandlerTool {
 			List tList = null;
 			if (msg.arg1 == 1) {
 				Map<String, String> map = (Map<String, String>) msg.obj;
+				messageInfo.retMap=map;
 				Gson gson = new Gson();
 				if (map != null) {
 					String status = map.get(JsonParse.STATUS);
@@ -219,8 +221,13 @@ public class MessageHandlerTool {
 								}
 							}).start();
 						} else if (!contenxt.getUpfalg()) {
-							listView.onRefreshComplete();
 							listView.setMode(Mode.PULL_FROM_START);
+							messageInfo.isHashValue = false;
+							messageInfo.isEnd = true;
+						}else if(contenxt.getUpfalg())
+						{
+							adapter.remove();
+							adapter.notifyDataSetChanged();
 							messageInfo.isHashValue = false;
 							messageInfo.isEnd = true;
 						}
@@ -231,6 +238,13 @@ public class MessageHandlerTool {
 				networkErrorShow(msg,contenxt.getContext());
 				if (!contenxt.getUpfalg())
 					contenxt.CurrPageMinus();
+				if(msg.arg1==2&&contenxt.getUpfalg())
+				{
+						adapter.remove();
+						adapter.notifyDataSetChanged();
+						messageInfo.isHashValue = false;
+						messageInfo.isEnd = true;
+				}
 			}
 			listView.onRefreshComplete();
 
@@ -312,7 +326,14 @@ public class MessageHandlerTool {
 			{
 				ToastShowTool.myToastTimeout(context);
 				isNetworkError = true;
-			} else
+			}else if (errorStatus == AppConstantError.LOAD_NULL)
+			// 加载为空
+			{
+				ToastShowTool.showEmptyPrompt(context);
+				isNetworkError = false;
+			}
+
+			else
 				isNetworkError=false;
 	}
 	/**
@@ -341,6 +362,7 @@ public class MessageHandlerTool {
 		private Boolean isSuccess = false;
 		private Boolean isHashValue = false;
 		private Boolean isEnd = false;
+		private Map<String ,String> retMap =new  HashMap();
 		@SuppressWarnings("rawtypes")
 		private List list;
 		@SuppressWarnings("rawtypes")
@@ -374,6 +396,11 @@ public class MessageHandlerTool {
 		public void setIsEnd(Boolean isEnd) {
 			this.isEnd = isEnd;
 		}
-
+		public Map<String, String> getRetMap() {
+			return retMap;
+		}
+		public void setRetMap(Map<String, String> retMap) {
+			this.retMap = retMap;
+		}
 	}
 }

@@ -33,6 +33,7 @@ import android.widget.TextView;
 
 import com.zxw.giftbook.R;
 import com.zxw.giftbook.config.NetworkConfig;
+import com.zxw.giftbook.utils.AppServerTool;
 
 import pri.zxw.library.base.MyBaseActivity;
 import pri.zxw.library.view.TitleBar;
@@ -53,7 +54,7 @@ public class RegisterAct extends MyBaseActivity {
 	private ImageView registerCheck;
 	private boolean isCheck = false;
 	private LinearLayout registerLay;
-	private ServicesTool mServicesTool;
+	private AppServerTool mServicesTool;
 	@SuppressWarnings("rawtypes")
 	private MessageHandlerTool handlerTool;
 	private boolean isVerifaction=false;
@@ -119,7 +120,7 @@ public class RegisterAct extends MyBaseActivity {
 	@SuppressWarnings("rawtypes")
 	private void initTool() {
 		handlerTool=new MessageHandlerTool(false);
-		mServicesTool = new ServicesTool(NetworkConfig.api_url,this, mHandler);
+		mServicesTool = new AppServerTool(NetworkConfig.api_url,this, mHandler);
 	}
 
 	/** 初始化布局 */

@@ -81,16 +81,23 @@
         <activity android:name=".Activity.GiftMoneyAddAct"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".Activity.GiftMoneyAddNewAct"
+            android:screenOrientation="portrait">
+        </activity>
         <activity android:name=".Activity.GroupMemberAddAct"
             android:screenOrientation="portrait">
         </activity>
         <activity android:name=".Activity.GroupMemberAct"
             android:screenOrientation="portrait">
         </activity>
+        <!--    -->
+        <activity android:name=".view.time_picker.DatePickerWindow"
+            android:screenOrientation="portrait">
+        </activity>
+        <!-- -->
         <activity android:name=".Test33Act"
             android:screenOrientation="portrait">
         </activity>
-
     </application>
 
 </manifest>

@@ -19,6 +19,7 @@ import com.zxw.giftbook.R;
 import com.zxw.giftbook.adapter.GroupMemberAdapter;
 import com.zxw.giftbook.adapter.HomeJournalAccountAdapter;
 import com.zxw.giftbook.config.NetworkConfig;
+import com.zxw.giftbook.utils.AppServerTool;
 import com.zxw.giftbook.utils.ComParamsAddTool;
 import com.zxw.giftbook.utils.MenuSettingViewInit;
 import com.zxw.giftbook.view.ListViewEmptyView;
@@ -42,7 +43,7 @@ import pri.zxw.library.view.TitleBar;
 
 public class GroupMemberAct extends MyPullToRefreshBaseActivity {
     GroupMemberAdapter mAdapter;
-    ServicesTool mServicesTool;
+    AppServerTool mServicesTool;
     com.handmark.pulltorefresh.library.PullToRefreshListView listView;
     TitleBar titleBar;
     ListViewEmptyView emptyView;
@@ -108,7 +109,7 @@ public class GroupMemberAct extends MyPullToRefreshBaseActivity {
     }
     void initTool()
     {
-        mServicesTool=new ServicesTool(NetworkConfig.api_url,this,mHandler);
+        mServicesTool=new AppServerTool(NetworkConfig.api_url,this,mHandler);
         mAdapter=new GroupMemberAdapter(this);
         listView.setAdapter(mAdapter);
         listView.setEmptyView(emptyView);

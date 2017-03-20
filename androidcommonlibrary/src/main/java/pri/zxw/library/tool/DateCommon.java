@@ -1,7 +1,11 @@
 package pri.zxw.library.tool;
 
+import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 
 import android.text.TextUtils;
 
@@ -16,321 +20,272 @@ import android.text.TextUtils;
  * @ChangedContent 修改内容
  */
 public class DateCommon {
-	/** 长格式 yyyy-MM-dd hh:mm:ss 12小时 hh:mm:ss 24小时 */
-	public static final String dateFormatBase = "yyyy-MM-dd HH:mm:ss";
-	/** 短格式 yyyy-MM-dd */
-	public static final String dateShortFormat = "yyyy-MM-dd";
-	private static final long ONE_MINUTE = 60000L;
-	private static final long ONE_HOUR = 3600000L;
-	private static final long ONE_DAY = 86400000L;
-	private static final long ONE_WEEK = 604800000L;
-	private static final String ONE_SECOND_AGO = "秒前";
-	private static final String ONE_MINUTE_AGO = "分钟前";
-	private static final String ONE_HOUR_AGO = "小时前";
-	private static final String ONE_DAY_AGO = "天前";
-	private static final String ONE_MONTH_AGO = "月前";
-	private static final String ONE_YEAR_AGO = "年前";
+	/** 长格式 yyyy.MM.dd  */
+	public static final String YYYY_P_MM_P_DD = "yyyy.MM.dd";
+	/** 日期格式：yyyy-MM-dd HH:mm:ss **/
+	public static final String YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
 
-	public static String getCurrentDateStr() {
-		java.util.Calendar c = java.util.Calendar.getInstance();
-		SimpleDateFormat f = new SimpleDateFormat(
-				dateFormatBase);
-		return f.format(c.getTime());
-	}
-	/**
-	 * 取小时时间
-	 * @return
-	 */
-	public static String getCurrentHourStr() {
-		java.util.Calendar c = java.util.Calendar.getInstance();
-		SimpleDateFormat f = new SimpleDateFormat(
-				"HH:mm");
-		return f.format(c.getTime());
-	}
-	
-	
-	/**
-	 * com.android.volley jar包提交时间格式，不能带有空格
-	 * @return
-	 */
-	public static String getVolleyCurrentDateStr() {
-		java.util.Calendar c = java.util.Calendar.getInstance();
-		SimpleDateFormat f = new SimpleDateFormat(
-				dateFormatBase);
-		return f.format(c.getTime()).replace(" ", "+");
-	}
+	/** 日期格式：yyyy-MM-dd HH:mm **/
+	public static final String YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
+
+	/** 日期格式：yyyy-MM-dd **/
+	public static final String YYYY_MM_DD = "yyyy-MM-dd";
+
+	/** 日期格式：HH:mm:ss **/
+	public static final String HH_MM_SS = "HH:mm:ss";
+
+	/** 日期格式：HH:mm **/
+	public static final String HH_MM = "HH:mm";
+
+	private final static long minute = 60 * 1000;// 1分钟
+	private final static long hour = 60 * minute;// 1小时
+	private final static long day = 24 * hour;// 1天
+	private final static long month = 31 * day;// 月
+	private final static long year = 12 * month;// 年
 
 	/**
-	 * long转换成时间格式
-	 * 
-	 * @param longStr
+	 * 将日期格式化成友好的字符串：几分钟前、几小时前、几天前、几月前、几年前、刚刚
+	 * @param date
 	 * @return
 	 */
-	public static String longConvertDateStr(String longStr) {
+	public final static String formatFriendly(Date date) {
+		if (date == null) {
+			return null;
+		}
+		long diff = new Date().getTime() - date.getTime();
+		long r = 0;
+		if (diff > year) {
+			r = (diff / year);
+			return r + "年前";
+		}
+		if (diff > month) {
+			r = (diff / month);
+			return r + "个月前";
+		}
+		if (diff > day) {
+			r = (diff / day);
+			return r + "天前";
+		}
+		if (diff > hour) {
+			r = (diff / hour);
+			return r + "个小时前";
+		}
+		if (diff > minute) {
+			r = (diff / minute);
+			return r + "分钟前";
+		}
+		return "刚刚";
+	}
 
-		String str = null;
+	/**
+	 * 把date字符串转换为时间格式，当date为空时或不是时间字符串时返回空值
+	 * @作者 田应平
+	 * @创建时间 2016年10月23日 下午2:03:54
+	 * @QQ号码 444141300
+	 * @主页 http://www.yinlz.com
+	 */
+	public final static Date toDate(String date){
+		if (ToolsString.isEmptyForObj(date))return null;
+		SimpleDateFormat sdf = null ;
 		try {
-			SimpleDateFormat format = new SimpleDateFormat(dateFormatBase);
-			long l = Long.parseLong(longStr);
-			str = format.format(new Date(l));
-		} catch (NumberFormatException e) {
+			switch (date.length()) {
+				case 19:
+					sdf = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS, Locale.CHINA);
+					break;
+				case 16:
+					sdf = new SimpleDateFormat(YYYY_MM_DD_HH_MM,Locale.CHINA);
+					break;
+				case 10:
+					sdf = new SimpleDateFormat(YYYY_MM_DD,Locale.CHINA);
+					break;
+				case 8:
+					sdf = new SimpleDateFormat(HH_MM_SS,Locale.CHINA);
+					break;
+				default:
+					break;
+			}
+			return sdf.parse(date);
+		} catch (ParseException e){
+			return null;
+		}
+	}
+
+	/**
+	 * 将日期以yyyy-MM-dd HH:mm:ss格式化
+	 *
+	 * @param dateL 日期
+	 * @return
+	 */
+	public final static String formatDateTime(long dateL) {
+		SimpleDateFormat sdf = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS,Locale.CHINA);
+		Date date = new Date(dateL);
+		return sdf.format(date);
+	}
+
+	/**
+	 * 将日期以yyyy-MM-dd HH:mm:ss格式化
+	 * @param dateL 日期
+	 * @return
+	 */
+	public final static String formatDateTime(long dateL, String formater) {
+		SimpleDateFormat sdf = new SimpleDateFormat(formater,Locale.CHINA);
+		return sdf.format(new Date(dateL));
+	}
+
+	/**
+	 * 将日期以yyyy-MM-dd HH:mm:ss格式化
+	 * @return
+	 */
+	public final static String formatDateTime(Date date, String formater) {
+		SimpleDateFormat sdf = new SimpleDateFormat(formater,Locale.CHINA);
+		return sdf.format(date);
+	}
+
+	/**
+	 * 将日期字符串转成日期
+	 * @param strDate 字符串日期
+	 * @return java.util.date日期类型
+	 */
+	public final static Date parseDate(String strDate) {
+		DateFormat dateFormat = new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS,Locale.CHINA);
+		Date returnDate = null;
+		try {
+			returnDate = dateFormat.parse(strDate);
+		} catch (ParseException e) {
+		}
+		return returnDate;
+
+	}
+
+	/**
+	 * 获取系统当前日期
+	 * @return
+	 */
+	public final static Date gainCurrentDate() {
+		return new Date();
+	}
+
+	/**
+	 * 验证日期是否比当前日期早
+	 * @param target1 比较时间1
+	 * @param target2 比较时间2
+	 * @return true 则代表target1比target2晚或等于target2，否则比target2早
+	 */
+	public final static boolean compareDate(Date target1, Date target2) {
+		boolean flag = false;
+		try {
+			String target1DateTime = formatDateTime(target1, YYYY_MM_DD_HH_MM_SS);
+			String target2DateTime = formatDateTime(target2, YYYY_MM_DD_HH_MM_SS);
+			if (target1DateTime.compareTo(target2DateTime) <= 0) {
+				flag = true;
+			}
+		} catch (Exception e1) {
+		}
+		return flag;
+	}
+
+	/**
+	 * 对日期进行增加操作
+	 * @param target 需要进行运算的日期
+	 * @param hour 小时
+	 * @return
+	 */
+	public final static Date addDateTime(Date target, double hour) {
+		if (null == target || hour < 0) {
+			return target;
+		}
+		return new Date(target.getTime() + (long) (hour * 60 * 60 * 1000));
+	}
+
+	/**
+	 * 对日期进行相减操作
+	 * @param target  需要进行运算的日期
+	 * @param hour 小时
+	 * @return
+	 */
+	public final static Date subDateTime(Date target, double hour) {
+		if (null == target || hour < 0) {
+			return target;
+		}
+		return new Date(target.getTime() - (long) (hour * 60 * 60 * 1000));
+	}
+	/**
+	 * 时间格式字符转换Calendar格式时间
+	 * @param dateStr
+	 * @return
+	 */
+	public final static Calendar strToCalendar(String dateStr)
+	{
+
+		SimpleDateFormat sdf= new SimpleDateFormat(YYYY_MM_DD_HH_MM_SS,Locale.CHINA);
+
+		Date date=null;
+		Calendar calendar = Calendar.getInstance();
+		try {
+			date = sdf.parse(dateStr);
+			calendar.setTime(date);
+		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
-		return str;
+		return calendar;
 	}
-
-	public static String convertString(String dateStr) {
-		if (dateStr == null || dateStr.trim().length() < 5) {
-			return dateStr;
-		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.S");
+	/**
+	 * Calendar格式时间 转换时间格式字符  yyyy/MM/DD
+	 * @param calendar
+	 * @return
+	 */
+	public final static  String calendarToStr_yyyy_X_MM_X_DD(Calendar calendar)
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd",Locale.CHINA);
+		String dateStr = sdf.format(calendar.getTime());
+		return dateStr;
+	}
+	/**
+	 * yyyy-MM-DD 转换时间格式字符  yyyy/MM/DD
+	 * @param dateStr
+	 * @return
+	 */
+	public final static  String yyyy_MM_ddToStr_yyyy_X_MM_X_dd(String dateStr)
+	{
 		try {
-			Date date = sdf.parse(dateStr);
-			sdf = new SimpleDateFormat("yyyy-MM-dd");
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy/MM/dd",Locale.CHINA);
+			Date date= parseDate(dateStr);
+			if(date==null)
+				return "";
 			return sdf.format(date);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-			return dateStr;
 		}
-	}
-
-	public static Date convertString(String dateStr, String dateFormat) {
-		if (dateStr == null) {
-			return null;
-		}
-		SimpleDateFormat sdf = null;
-		if (dateFormat != null)
-			sdf = new SimpleDateFormat(dateFormat);
-		else
-			sdf = new SimpleDateFormat(dateFormatBase);
-		try {
-			Date date = sdf.parse(dateStr);
-			return date;
-		} catch (Exception e) {
-			e.printStackTrace();
-			Date date = new Date(System.currentTimeMillis());
-			return date;
-		}
+		return "";
 	}
 
 	/**
-	 * 获取当前时间与传入的时间差
-	 * 
-	 * @param date
-	 * @return 格式多少多少时间至前 :1天前
-	 */
-	public static String formatDateBefor(String dateStr) {
-		return formatDateBefor(convertString(dateStr, dateFormatBase));
-	}
-	/**
-	 * long转换成时间格式
-	 * 
-	 * @param longStr
+	 * yyyy-MM-DD 转换时间格式字符  MM月DD日
+	 * @param dateStr
 	 * @return
 	 */
-	public static Date longConvertDate(long longDate) {
-		try {
-			return new Date(longDate) ;
-		} catch (NumberFormatException e) {
-			e.printStackTrace();
-		}
-		return null;
-	}
-	/**
-	 * 下拉刷新时间格式
-	 * 
-	 * @param date
-	 */
-	public static String pullToRefreshDate(long longDate) {
-		String dateStr=longConvertDateStr(longDate+"");
-		
-		Date date=longConvertDate(longDate);
-		long delta = new Date().getTime() - date.getTime();
-		if (delta < 1L * ONE_MINUTE) {
-			return "刚刚";
-		}
-		if (delta < 45L * ONE_MINUTE) {
-			long minutes = toMinutes(delta);
-			return (minutes <= 0 ? 1 : minutes) + ONE_MINUTE_AGO;
-		}
-		long days = toDays(delta);
-		String dayStr="";
-		if(days==0)
-			dayStr="今日";
-		else if(days==1)
-			dayStr="昨日";
-		else {
-			dayStr="很久以前";
-		}
-		 dateStr=dayStr+dateStr.substring(10);
-		return dateStr;
-	}
-	/**
-	 * 获取当前时间与传入的时间差
-	 * 
-	 * @param date
-	 * @return 格式多少多少时间之前 :1天前
-	 */
-	public static String formatDateBefor(Date date) {
-		long delta = new Date().getTime() - date.getTime();
-		if (delta < 1L * ONE_MINUTE) {
-			long seconds = toSeconds(delta);
-			return (seconds <= 0 ? 1 : seconds) + ONE_SECOND_AGO;
-		}
-		if (delta < 45L * ONE_MINUTE) {
-			long minutes = toMinutes(delta);
-			return (minutes <= 0 ? 1 : minutes) + ONE_MINUTE_AGO;
-		}
-		if (delta < 24L * ONE_HOUR) {
-			long hours = toHours(delta);
-			return (hours <= 0 ? 1 : hours) + ONE_HOUR_AGO;
-		}
-		if (delta < 48L * ONE_HOUR) {
-			return "昨天";
-		}
-		if (delta < 30L * ONE_DAY) {
-			long days = toDays(delta);
-			return (days <= 0 ? 1 : days) + ONE_DAY_AGO;
-		}
-		if (delta < 12L * 4L * ONE_WEEK) {
-			long months = toMonths(delta);
-			return (months <= 0 ? 1 : months) + ONE_MONTH_AGO;
-		} else {
-			long years = toYears(delta);
-			return (years <= 0 ? 1 : years) + ONE_YEAR_AGO;
-		}
-	}
-	/**
-	 * 将时间戳转为字符串 ，格式：yyyy-MM-dd HH:mm
-	 */
-	public static String getStrTime_ymd_hm(String cc_time) {
-		String re_StrTime = "";
-		if(TextUtils.isEmpty(cc_time) || "null".equals(cc_time)){
-			return re_StrTime;
-		}
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		// 例如：cc_time=1291778220
-		long lcc_time = Long.valueOf(cc_time);
-		re_StrTime = sdf.format(new Date(lcc_time * 1000L));
-		return re_StrTime;
-
+	public final static  String yyyy_MM_ddToStr_MM_dd(String dateStr)
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat("MM月dd日");
+		Date date= parseDate(dateStr);
+		if(date==null)
+			return "";
+		return sdf.format(date);
 	}
 
 	/**
-	 * 将时间戳转为字符串 ，格式：yyyy-MM-dd HH:mm:ss
+	 * yyyy-MM-DD 转换时间格式字符  MM月DD日
+	 * @return
 	 */
-	public static String getStrTime_ymd_hms(String cc_time) {
-		String re_StrTime = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		// 例如：cc_time=1291778220
-		long lcc_time = Long.valueOf(cc_time);
-		re_StrTime = sdf.format(new Date(lcc_time * 1000L));
-		return re_StrTime;
-
+	public final static  String dateToYYYY_P_MM_P_dd(Long dateL)
+	{
+		SimpleDateFormat sdf = new SimpleDateFormat(YYYY_P_MM_P_DD);
+		if(dateL==null)
+			return "";
+		Date date=new Date(dateL);
+		return sdf.format(date);
 	}
-
-	/**
-	 * 将时间戳转为字符串 ，格式：yyyy.MM.dd
-	 */
-	public static String getStrTime_ymd(String cc_time) {
-		String re_StrTime = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd");
-		// 例如：cc_time=1291778220
-		long lcc_time = Long.valueOf(cc_time);
-		re_StrTime = sdf.format(new Date(lcc_time * 1000L));
-		return re_StrTime;
-	}
-
-	/**
-	 * 将时间戳转为字符串 ，格式：yyyy
-	 */
-	public static String getStrTime_y(String cc_time) {
-		String re_StrTime = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy");
-		// 例如：cc_time=1291778220
-		long lcc_time = Long.valueOf(cc_time);
-		re_StrTime = sdf.format(new Date(lcc_time * 1000L));
-		return re_StrTime;
-	}
-
-	/**
-	 * 将时间戳转为字符串 ，格式：MM-dd
-	 */
-	public static String getStrTime_md(String cc_time) {
-		String re_StrTime = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd");
-		// 例如：cc_time=1291778220
-		long lcc_time = Long.valueOf(cc_time);
-		re_StrTime = sdf.format(new Date(lcc_time * 1000L));
-		return re_StrTime;
-	}
-
-	/**
-	 * 将时间戳转为字符串 ，格式：HH:mm
-	 */
-	public static String getStrTime_hm(String cc_time) {
-		String re_StrTime = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
-		// 例如：cc_time=1291778220
-		long lcc_time = Long.valueOf(cc_time);
-		re_StrTime = sdf.format(new Date(lcc_time * 1000L));
-		return re_StrTime;
-	}
-
-	/**
-	 * 将时间戳转为字符串 ，格式：HH:mm:ss
-	 */
-	public static String getStrTime_hms(String cc_time) {
-		String re_StrTime = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-		// 例如：cc_time=1291778220
-		long lcc_time = Long.valueOf(cc_time);
-		re_StrTime = sdf.format(new Date(lcc_time * 1000L));
-		return re_StrTime;
-	}
-	
-	/**
-	 * 将时间戳转为字符串 ，格式：MM-dd HH:mm:ss
-	 */
-	public static String getNewsDetailsDate(String cc_time) {
-		String re_StrTime = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("MM-dd HH:mm:ss");
-		// 例如：cc_time=1291778220
-		long lcc_time = Long.valueOf(cc_time);
-		re_StrTime = sdf.format(new Date(lcc_time * 1000L));
-		return re_StrTime;
-	}
-
-	/**
-	 * 将字符串转为时间戳
-	 */
-	public static String getTime() {
-		String re_time = null;
-		long currentTime = System.currentTimeMillis();
-		Date d;
-		d = new Date(currentTime);
-		long l = d.getTime();
-		String str = String.valueOf(l);
-		re_time = str.substring(0, 10);
-		return re_time;
-	}
-	
-	/**
-	 * 将时间戳转为字符串 ，格式：yyyy.MM.dd  星期几
-	 */
-	public static String getSection(String cc_time) {
-		String re_StrTime = null;
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd  EEEE");
-//		对于创建SimpleDateFormat传入的参数：EEEE代表星期，如“星期四”；MMMM代表中文月份，如“十一月”；MM代表月份，如“11”；
-//		yyyy代表年份，如“2010”；dd代表天，如“25”
-		// 例如：cc_time=1291778220
-		long lcc_time = Long.valueOf(cc_time);
-		re_StrTime = sdf.format(new Date(lcc_time * 1000L));
-		return re_StrTime;
-	}
-	
 	
 	
 	

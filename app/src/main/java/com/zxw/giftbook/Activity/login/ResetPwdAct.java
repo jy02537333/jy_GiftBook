@@ -7,7 +7,6 @@ import java.util.Map;
 import pri.zxw.library.entity.User;
 import pri.zxw.library.tool.JsonParse;
 import pri.zxw.library.tool.ProgressDialogTool;
-import pri.zxw.library.tool.ServicesTool;
 import pri.zxw.library.tool.ToastShowTool;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,6 +25,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.zxw.giftbook.R;
 import com.zxw.giftbook.config.NetworkConfig;
+import com.zxw.giftbook.utils.AppServerTool;
 
 /**
  * 重置密码
@@ -39,7 +39,7 @@ public class ResetPwdAct extends MyBaseActivity {
 	private Button nextBtn;
 	private TitleBar titleTv;
 	private String mobileStr;
-	private ServicesTool mServicesTool;
+	private AppServerTool mServicesTool;
 	private final static int REGISTER_CODE = 5341;
 	Handler mHandler = new Handler() {
 		@Override
@@ -91,7 +91,7 @@ public class ResetPwdAct extends MyBaseActivity {
 
 	/** 初始化数据 */
 	private void initTool() {
-		mServicesTool = new ServicesTool(NetworkConfig.api_url,this, mHandler);
+		mServicesTool = new AppServerTool(NetworkConfig.api_url,this, mHandler);
 	}
 
 	/** 初始化布局 */

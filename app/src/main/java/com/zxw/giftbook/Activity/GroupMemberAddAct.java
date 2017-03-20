@@ -18,6 +18,7 @@ import com.zxw.giftbook.FtpApplication;
 import com.zxw.giftbook.R;
 import com.zxw.giftbook.adapter.GroupMemberAdapter;
 import com.zxw.giftbook.config.NetworkConfig;
+import com.zxw.giftbook.utils.AppServerTool;
 import com.zxw.giftbook.utils.ComParamsAddTool;
 import com.zxw.giftbook.view.ListViewEmptyView;
 
@@ -35,7 +36,6 @@ import pri.zxw.library.listener.TitleOnClickListener;
 import pri.zxw.library.tool.JsonParse;
 import pri.zxw.library.tool.MessageHandlerTool;
 import pri.zxw.library.tool.ProgressDialogTool;
-import pri.zxw.library.tool.ServicesTool;
 import pri.zxw.library.tool.ToastShowTool;
 import pri.zxw.library.tool.dialogTools.DialogSheetzAction;
 import pri.zxw.library.tool.dialogTools.DropDownBoxTool;
@@ -49,7 +49,7 @@ import pri.zxw.library.view.TitleBar;
 
 public class GroupMemberAddAct extends MyBaseActivity {
     boolean isSubmit=false;
-    ServicesTool mServicesTool;
+    AppServerTool mServicesTool;
     TitleBar titleBar;
     /**关联人所在组*/
     String affiliatedGroup;
@@ -167,7 +167,7 @@ public class GroupMemberAddAct extends MyBaseActivity {
     }
     void initTool()
     {
-        mServicesTool=new ServicesTool(NetworkConfig.api_url,this,mHandler);
+        mServicesTool=new AppServerTool(NetworkConfig.api_url,this,mHandler);
     }
     public void initListener()
     {

@@ -37,7 +37,7 @@ public class GroupmemberEntity extends BaseEntity implements java.io.Serializabl
 	/**状态(0=删除，1正常)*/
 	private Integer state;
 	/**创建时间*/
-	private String createDate;
+	private Long createDate;
 //	/**创建人编号*/
 //	private String createBy;
 //	/**创建人姓名*/
@@ -175,7 +175,7 @@ public class GroupmemberEntity extends BaseEntity implements java.io.Serializabl
 	 *方法: 取得java.util.Date
 	 *@return: java.util.Date  创建时间
 	 */
-	public  String getCreateDate(){
+	public  Long getCreateDate(){
 		return this.createDate;
 	}
 
@@ -183,7 +183,7 @@ public class GroupmemberEntity extends BaseEntity implements java.io.Serializabl
 	 *方法: 设置java.util.Date
 	 *@param: java.util.Date  创建时间
 	 */
-	public void setCreateDate(String createDate){
+	public void setCreateDate(Long createDate){
 		this.createDate = createDate;
 	}
 	/**关联人总金额*/

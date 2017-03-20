@@ -7,7 +7,6 @@ import pri.zxw.library.entity.User;
 import pri.zxw.library.listener.TitleOnClickListener;
 import pri.zxw.library.tool.JsonParse;
 import pri.zxw.library.tool.ProgressDialogTool;
-import pri.zxw.library.tool.ServicesTool;
 import pri.zxw.library.tool.SharedpreferencesTool;
 import pri.zxw.library.tool.ToastShowTool;
 import android.content.Intent;
@@ -29,6 +28,7 @@ import com.google.gson.reflect.TypeToken;
 import com.zxw.giftbook.FtpApplication;
 import com.zxw.giftbook.R;
 import com.zxw.giftbook.config.NetworkConfig;
+import com.zxw.giftbook.utils.AppServerTool;
 
 public class RegisterPwdAct extends MyBaseActivity {
 	private EditText pwd1Edit;
@@ -37,7 +37,7 @@ public class RegisterPwdAct extends MyBaseActivity {
 	private TitleBar titleTv;
 	private String accountString;
 	private String verificationStr;
-	private ServicesTool mServicesTool;
+	private AppServerTool mServicesTool;
 	private final static int REGISTER_CODE=5341;
 	Handler mHandler=new Handler(){
 		@Override
@@ -96,7 +96,7 @@ public class RegisterPwdAct extends MyBaseActivity {
 	
 	/** 初始化数据*/
 	private void initTool() {
-		mServicesTool=new ServicesTool(NetworkConfig.api_url,this,  mHandler);
+		mServicesTool=new AppServerTool(NetworkConfig.api_url,this,  mHandler);
 	}
 	
 	/** 初始化布局*/

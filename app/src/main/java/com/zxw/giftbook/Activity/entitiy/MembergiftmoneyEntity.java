@@ -34,13 +34,13 @@ public class MembergiftmoneyEntity extends BaseEntity implements java.io.Seriali
 	/**状态(0=删除，1正常)*/
 	private Integer state;
 	/**创建时间*/
-	private java.util.Date createDate;
+	private Long createDate;
 	/**创建人编号*/
 	private String createBy;
 	/**创建人姓名*/
 	private String createName;
 	/**更新时间*/
-	private java.util.Date updateDate;
+	private Long updateDate;
 	/**更新人编号*/
 	private String updateBy;
 	/**更信任姓名*/
@@ -167,18 +167,18 @@ public class MembergiftmoneyEntity extends BaseEntity implements java.io.Seriali
 		this.state = state;
 	}
 	/**
-	 *方法: 取得java.util.Date
-	 *@return: java.util.Date  创建时间
+	 *方法: 取得Long
+	 *@return: Long  创建时间
 	 */
-	public java.util.Date getCreateDate(){
+	public Long getCreateDate(){
 		return this.createDate;
 	}
 
 	/**
-	 *方法: 设置java.util.Date
-	 *@param: java.util.Date  创建时间
+	 *方法: 设置Long
+	 *@param: Long  创建时间
 	 */
-	public void setCreateDate(java.util.Date createDate){
+	public void setCreateDate(Long createDate){
 		this.createDate = createDate;
 	}
 	/**
@@ -212,18 +212,18 @@ public class MembergiftmoneyEntity extends BaseEntity implements java.io.Seriali
 		this.createName = createName;
 	}
 	/**
-	 *方法: 取得java.util.Date
-	 *@return: java.util.Date  更新时间
+	 *方法: 取得Long
+	 *@return: Long  更新时间
 	 */
-	public java.util.Date getUpdateDate(){
+	public Long getUpdateDate(){
 		return this.updateDate;
 	}
 
 	/**
-	 *方法: 设置java.util.Date
-	 *@param: java.util.Date  更新时间
+	 *方法: 设置Long
+	 *@param: Long  更新时间
 	 */
-	public void setUpdateDate(java.util.Date updateDate){
+	public void setUpdateDate(Long updateDate){
 		this.updateDate = updateDate;
 	}
 	/**

@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pri.zxw.library.base.MyBaseAdapter;
+import pri.zxw.library.tool.DateCommon;
 import pri.zxw.library.tool.ImgLoadMipmapTool;
 
 /**
@@ -76,7 +77,7 @@ public class HomeJournalAccountAdapter extends MyBaseAdapter<MembergiftmoneyEnti
             ImgLoadMipmapTool.load(R.mipmap.plus_alt ,holder.item_list_f_home_journal_account_alt_img);
         }
 
-       String date="";//  DateCommon.dateToStr_yyyy_X_MM_X_DD(entity.getCreateDate());
+       String date= DateCommon.dateToYYYY_P_MM_P_dd(entity.getCreateDate());
         holder.item_list_f_home_journal_account_date_tv.setText(date);
         holder.item_list_f_home_journal_account_fee_tv.setText(entity.getMoney()+"");
         holder.item_list_f_home_journal_account_name_tv.setText(entity.getGroupmember());

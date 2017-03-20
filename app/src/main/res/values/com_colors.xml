@@ -32,5 +32,7 @@
 
     <!-- 公共 横线颜色 -->
     <color name="com_line_color">#e5e5e5</color>
+    <!-- 公共 横线颜色 -->
+    <color name="com_line_black_color">#aaaaaa</color>
 
 </resources>

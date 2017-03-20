@@ -19,6 +19,7 @@ import com.zxw.giftbook.FtpApplication;
 import com.zxw.giftbook.R;
 import com.zxw.giftbook.adapter.SidekickerGroupAdapter;
 import com.zxw.giftbook.config.NetworkConfig;
+import com.zxw.giftbook.utils.AppServerTool;
 import com.zxw.giftbook.utils.ComParamsAddTool;
 import com.zxw.giftbook.utils.MenuSettingViewInit;
 
@@ -30,7 +31,6 @@ import java.util.Map;
 import pri.zxw.library.base.MyPullToRefreshBaseFragment;
 import pri.zxw.library.db.JsonStrHistoryDao;
 import pri.zxw.library.tool.MessageHandlerTool;
-import pri.zxw.library.tool.ServicesTool;
 import pri.zxw.library.view.TitleBar;
 
 /**
@@ -44,7 +44,7 @@ public class SidekickerGroupFragment extends MyPullToRefreshBaseFragment {
     TitleBar titleBar;
     GridView gridView;
     SidekickerGroupAdapter adapter;
-    ServicesTool mServicesTool;
+    AppServerTool mServicesTool;
     SwipeRefreshLayout swipeRefreshLayout;
     public static final String GET_DATA_URL="apiSidekickergroupCtrl.do?list";
     public static final int GET_DATA_CODE=1111;
@@ -143,7 +143,7 @@ public class SidekickerGroupFragment extends MyPullToRefreshBaseFragment {
     void initTool()
     {
         MenuSettingViewInit.init(titleBar,getActivity());
-        mServicesTool=new ServicesTool(NetworkConfig.api_url,getActivity(),mHandler);
+        mServicesTool=new AppServerTool(NetworkConfig.api_url,getActivity(),mHandler);
         adapter=new SidekickerGroupAdapter(this);
         gridView.setAdapter(adapter);
     }

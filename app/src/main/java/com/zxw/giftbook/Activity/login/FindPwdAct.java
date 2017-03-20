@@ -9,7 +9,6 @@ import java.util.regex.Pattern;
 import pri.zxw.library.listener.TitleOnClickListener;
 import pri.zxw.library.tool.JsonParse;
 import pri.zxw.library.tool.MessageHandlerTool;
-import pri.zxw.library.tool.ServicesTool;
 import pri.zxw.library.tool.ToastShowTool;
 import android.content.Intent;
 import android.graphics.Color;
@@ -25,6 +24,7 @@ import android.widget.TextView;
 
 import com.zxw.giftbook.R;
 import com.zxw.giftbook.config.NetworkConfig;
+import com.zxw.giftbook.utils.AppServerTool;
 
 import pri.zxw.library.base.MyBaseActivity;
 import pri.zxw.library.view.TitleBar;
@@ -41,7 +41,7 @@ public class FindPwdAct extends MyBaseActivity {
 	private EditText accountEdit;
 	private EditText codeEdit;
 	private Button nextBtn, getCodeBtn;
-	private ServicesTool mServicesTool;
+	private AppServerTool mServicesTool;
 	private boolean isVerifaction=false;
 	private boolean isClickVerifaction=false;
 	private final static int VERIFICATION_CODE = 5341;
@@ -108,7 +108,7 @@ public class FindPwdAct extends MyBaseActivity {
 	/** 初始化数据 */
 	@SuppressWarnings("rawtypes")
 	private void initTool() {
-		mServicesTool = new ServicesTool(NetworkConfig.api_url,this, mHandler);
+		mServicesTool = new AppServerTool(NetworkConfig.api_url,this, mHandler);
 		handlerTool=new MessageHandlerTool(false);
 	}
 

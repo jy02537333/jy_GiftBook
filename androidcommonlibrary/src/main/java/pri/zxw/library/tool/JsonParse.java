@@ -16,7 +16,7 @@ public class JsonParse {
 	public static final String STATUS="result";
 	public static final String MSG="msg";
 	public static final String CONTEXT="data";
-	
+	public static final String SUM_COUNT="sumCount";
 	public static Map<String, String> parseReturnValueForLogin(String data) throws Exception {
 		if (!isJson(data)) {
 			return null;
@@ -81,6 +81,7 @@ public class JsonParse {
 		map.put(CONTEXT, jsonObj.getString(CONTEXT)); // 返回内容
 		map.put(STATUS, jsonObj.getString(STATUS)); // 状�?
 		map.put(MSG, jsonObj.getString(MSG)); // 消息
+		map.put(SUM_COUNT, jsonObj.getString(SUM_COUNT)); // 消息
 		return map;
 	}
 

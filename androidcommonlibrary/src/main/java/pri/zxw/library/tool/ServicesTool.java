@@ -41,7 +41,7 @@ import pri.zxw.library.entity.FileEntity;
  * @ChangedBy 张相伟
  * @ChangedContent 修改内容
  */
-public class ServicesTool {
+public abstract class ServicesTool {
 	private String baseUrl;
 	private Handler mHandler;
 	private Context mContext;
@@ -273,6 +273,11 @@ public class ServicesTool {
 	}
 
 	/**
+	 * token验证回掉
+	 */
+	public abstract  void tokenVerifyCallback(Context context);
+
+	/**
 	 * 处理responseBody，不管理超时返回
 	 *
 	 * @param responseBody
@@ -308,8 +313,14 @@ public class ServicesTool {
 					if (map.get(JsonParse.STATUS).equals("1")) {
 						msg.arg1 = 1;
 					}
+					if(map.get(JsonParse.STATUS).equals("5"))
+					{
+						tokenVerifyCallback(mContext);
+					}
 					if(map.get(JsonParse.CONTEXT).equals("null"))
 						map.put(JsonParse.CONTEXT,"");
+					if(map.get(JsonParse.SUM_COUNT).equals("null"))
+						map.put(JsonParse.SUM_COUNT,"");
 					msg.obj = map;
 				} else
 					msg.arg2 = AppConstantError.WEBSEVICE_SOAP_FAULT;

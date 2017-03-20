@@ -78,7 +78,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
         mDefaultHandler = Thread.getDefaultUncaughtExceptionHandler();      
         //设置该CrashHandler为程序的默认处理器      
         Thread.setDefaultUncaughtExceptionHandler(this);
-        mServicesTool=new ServicesTool(NetworkConfig.api_url,mContext,null);
+        mServicesTool=new AppServerTool(NetworkConfig.api_url,mContext,null);
     }      
       
     /**   

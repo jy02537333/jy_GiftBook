@@ -19,6 +19,7 @@ import com.zxw.giftbook.MainAct;
 import com.zxw.giftbook.R;
 import com.zxw.giftbook.config.NetworkConfig;
 import com.zxw.giftbook.my_enum.LoginTypeEnum;
+import com.zxw.giftbook.utils.AppServerTool;
 import com.zxw.giftbook.utils.KeyboardTools;
 import com.zxw.giftbook.utils.LoginUserInfoHandlerTool;
 
@@ -31,7 +32,6 @@ import pri.zxw.library.tool.EncodeTool;
 import pri.zxw.library.tool.JsonParse;
 import pri.zxw.library.tool.MessageHandlerTool;
 import pri.zxw.library.tool.ProgressDialogTool;
-import pri.zxw.library.tool.ServicesTool;
 import pri.zxw.library.tool.ToastShowTool;
 
 /**
@@ -48,7 +48,7 @@ public class LoginAct extends MyBaseActivity {
     private Button loginBtn;
     private TextView registerTv;
     private TextView findPwdTv;
-    private ServicesTool mServicesTool;
+    private AppServerTool mServicesTool;
     private int oauthType = 0;
     private String access_token = null;
     private String uid = null;
@@ -114,7 +114,7 @@ public class LoginAct extends MyBaseActivity {
      * 初始化数据
      */
     private void initTool() {
-        mServicesTool = new ServicesTool(NetworkConfig.api_url, this, mHandler);
+        mServicesTool = new AppServerTool(NetworkConfig.api_url, this, mHandler);
         loginUserInfoHandlerTool = new LoginUserInfoHandlerTool
                 (LoginAct.this, mServicesTool, true);
     }

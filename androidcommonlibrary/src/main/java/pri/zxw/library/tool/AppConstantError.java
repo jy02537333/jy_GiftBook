@@ -25,8 +25,11 @@ public class AppConstantError {
    /**
     * 添加数据，重复主键错误
     */
-   public static final Integer REGIST_PK_ERROR=2627;  
-
+   public static final Integer REGIST_PK_ERROR=2627;
+    /**
+     * 没有加载到数据
+     */
+    public static final Integer LOAD_NULL=2;
    	/**
 	 * 代码错误，未知错误
 	 */

@@ -15,6 +15,7 @@ import android.widget.ImageView;
 
 import com.zxw.giftbook.Activity.login.LoginAct;
 import com.zxw.giftbook.config.NetworkConfig;
+import com.zxw.giftbook.utils.AppServerTool;
 import com.zxw.giftbook.utils.LoginUserInfoHandlerTool;
 
 import java.util.HashMap;
@@ -65,7 +66,7 @@ public class Welcome extends MyBaseActivity {
 		super.onCreate(savedInstanceState);
 		view = View.inflate(this, R.layout.a_welcome, null);
 		setContentView(view);
-		mServicesTool = new ServicesTool(NetworkConfig.api_url,this, mHandler);
+		mServicesTool = new AppServerTool(NetworkConfig.api_url,this, mHandler);
 		loginUserInfoHandlerTool=new LoginUserInfoHandlerTool(
 				Welcome.this, mServicesTool);
 		initView();

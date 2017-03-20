@@ -27,7 +27,7 @@ public class GifttypeEntity  extends BaseEntity implements java.io.Serializable 
 	/**父级id*/
 	private String parentid;
 	/**创建时间*/
-	private java.util.Date createDate;
+	private Long createDate;
 //	/**创建人编号*/
 //	private String createBy;
 //	/**创建人姓名*/
@@ -103,7 +103,7 @@ public class GifttypeEntity  extends BaseEntity implements java.io.Serializable 
 	 *方法: 取得java.util.Date
 	 *@return: java.util.Date  创建时间
 	 */
-	public java.util.Date getCreateDate(){
+	public Long getCreateDate(){
 		return this.createDate;
 	}
 
@@ -111,7 +111,7 @@ public class GifttypeEntity  extends BaseEntity implements java.io.Serializable 
 	 *方法: 设置java.util.Date
 	 *@param: java.util.Date  创建时间
 	 */
-	public void setCreateDate(java.util.Date createDate){
+	public void setCreateDate(Long createDate){
 		this.createDate = createDate;
 	}
 //	/**

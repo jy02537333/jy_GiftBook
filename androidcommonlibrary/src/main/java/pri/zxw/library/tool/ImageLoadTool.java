@@ -41,7 +41,7 @@ public class ImageLoadTool {
 				// .discCacheFileNameGenerator(new
 				// HashCodeFileNameGenerator())//将保存的时候的URI名称用HASHCODE加密
 				.tasksProcessingOrder(QueueProcessingType.LIFO)
-				 .diskCacheFileCount(10) //缓存的File数量
+				 .diskCacheFileCount(500) //缓存的File数量
 				.diskCache(new UnlimitedDiskCache(cacheDir))// 自定义缓存路径
 				// .defaultDisplayImageOptions(DisplayImageOptions.createSimple())
 				// .imageDownloader(new BaseImageDownloader(context, 5 * 1000,

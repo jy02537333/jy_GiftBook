@@ -9,6 +9,7 @@ import com.zxw.giftbook.config.NetworkConfig;
 import com.google.gson.reflect.TypeToken;
 import com.handmark.pulltorefresh.library.PullToRefreshBase;
 import com.handmark.pulltorefresh.library.PullToRefreshListView;
+import com.zxw.giftbook.utils.AppServerTool;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -18,7 +19,6 @@ import pri.zxw.library.base.MyBaseAdapter;
 import pri.zxw.library.base.MyPullToRefreshBaseActivity;
 import pri.zxw.library.entity.ComInfo;
 import pri.zxw.library.tool.MessageHandlerTool;
-import pri.zxw.library.tool.ServicesTool;
 import pri.zxw.library.tool.WebGetDataTool;
 
 /**
@@ -26,7 +26,7 @@ import pri.zxw.library.tool.WebGetDataTool;
  */
 public class poortwoActivity extends MyPullToRefreshBaseActivity
 {
-    ServicesTool mServicesTool;
+    AppServerTool mServicesTool;
     MessageHandlerTool mMessageHandlerTool;
     MyBaseAdapter mAdapter;
     PullToRefreshListView lv;
@@ -55,7 +55,7 @@ public class poortwoActivity extends MyPullToRefreshBaseActivity
     void initTool()
     {
         mMessageHandlerTool=new MessageHandlerTool();
-        mServicesTool=new ServicesTool(NetworkConfig.api_url,this,mHandler);
+        mServicesTool=new AppServerTool(NetworkConfig.api_url,this,mHandler);
     }
     void initListenere()
     {

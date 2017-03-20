@@ -106,7 +106,7 @@ public class User extends BaseEntity implements Cloneable {
     /**
      * 创建时间
      */
-    private java.util.Date createDate;
+    private Long createDate;
     /**
      * 创建人编号
      */
@@ -118,7 +118,7 @@ public class User extends BaseEntity implements Cloneable {
     /**
      * 更新时间
      */
-    private java.util.Date updateDate;
+    private Long updateDate;
     /**
      * 更新人编号
      */
@@ -523,20 +523,20 @@ public class User extends BaseEntity implements Cloneable {
     }
 
     /**
-     * 方法: 取得java.util.Date
+     * 方法: 取得Long
      *
-     * @return: java.util.Date  创建时间
+     * @return: Long  创建时间
      */
-    public java.util.Date getCreateDate() {
+    public Long getCreateDate() {
         return this.createDate;
     }
 
     /**
-     * 方法: 设置java.util.Date
+     * 方法: 设置Long
      *
-     * @param: java.util.Date  创建时间
+     * @param: Long  创建时间
      */
-    public void setCreateDate(java.util.Date createDate) {
+    public void setCreateDate(Long createDate) {
         this.createDate = createDate;
     }
 
@@ -577,20 +577,20 @@ public class User extends BaseEntity implements Cloneable {
     }
 
     /**
-     * 方法: 取得java.util.Date
+     * 方法: 取得Long
      *
-     * @return: java.util.Date  更新时间
+     * @return: Long  更新时间
      */
-    public java.util.Date getUpdateDate() {
+    public Long getUpdateDate() {
         return this.updateDate;
     }
 
     /**
-     * 方法: 设置java.util.Date
+     * 方法: 设置Long
      *
-     * @param: java.util.Date  更新时间
+     * @param: Long  更新时间
      */
-    public void setUpdateDate(java.util.Date updateDate) {
+    public void setUpdateDate(Long updateDate) {
         this.updateDate = updateDate;
     }
 

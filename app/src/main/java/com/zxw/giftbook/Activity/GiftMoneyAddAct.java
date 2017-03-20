@@ -17,6 +17,7 @@ import com.zxw.giftbook.Activity.entitiy.GroupmemberEntity;
 import com.zxw.giftbook.FtpApplication;
 import com.zxw.giftbook.R;
 import com.zxw.giftbook.config.NetworkConfig;
+import com.zxw.giftbook.utils.AppServerTool;
 import com.zxw.giftbook.utils.ComParamsAddTool;
 
 import org.json.JSONArray;
@@ -33,7 +34,6 @@ import pri.zxw.library.listener.TxtLengthRestrictTool;
 import pri.zxw.library.tool.MessageHandlerTool;
 import pri.zxw.library.tool.MyAlertDialog;
 import pri.zxw.library.tool.ProgressDialogTool;
-import pri.zxw.library.tool.ServicesTool;
 import pri.zxw.library.tool.ToastShowTool;
 import pri.zxw.library.tool.dialogTools.DialogSheetzAction;
 import pri.zxw.library.tool.dialogTools.DropDownBoxTool;
@@ -46,13 +46,14 @@ import pri.zxw.library.view.TitleBar;
 
 public class GiftMoneyAddAct extends MyBaseActivity {
     boolean isSubmit=false;
-    ServicesTool mServicesTool;
+    AppServerTool mServicesTool;
     TitleBar titleBar;
     public static final String ADD_URL="apiMembergiftmoneyCtrl.do?doAdd";
 
     TreeMap<String,String> giftTypeMap=new TreeMap<>();
     TreeMap<String,String> sidekickerGroups=new TreeMap<>();
     TreeMap<String,String>  groupmembers=new TreeMap<>();
+    TreeMap<String,Integer> membersNum=new TreeMap<>();
     TextView
     /**组类型*/
     typeTv;
@@ -96,6 +97,7 @@ public class GiftMoneyAddAct extends MyBaseActivity {
                         for (int i=0;sidekickerGroupJsons!=null&&i<sidekickerGroupJsons.length();i++)
                         {
                             org.json.JSONObject obj=(org.json.JSONObject)sidekickerGroupJsons.get(i);
+                            membersNum.put(obj.getString("id"),obj.getInt("groupmembersnum"));
                             sidekickerGroups.put(obj.getString("id"),obj.getString("groupname"));
                         }
 
@@ -135,7 +137,7 @@ public class GiftMoneyAddAct extends MyBaseActivity {
                     } catch (Exception e) {
                     }
                 }else
-                    ToastShowTool.myToastShort(GiftMoneyAddAct.this,"该组下没人！");
+                    ToastShowTool.myToastShort(GiftMoneyAddAct.this,"该组下未有亲友！");
                 isGetGroupMembering=false;
             }
             ProgressDialogTool.getInstance(GiftMoneyAddAct.this).dismissDialog();
@@ -165,7 +167,7 @@ public class GiftMoneyAddAct extends MyBaseActivity {
     }
     void initTool()
     {
-        mServicesTool=new ServicesTool(NetworkConfig.api_url,this,mHandler);
+        mServicesTool=new AppServerTool(NetworkConfig.api_url,this,mHandler);
     }
     public void initListener()
     {
@@ -317,6 +319,12 @@ public class GiftMoneyAddAct extends MyBaseActivity {
                 this, null, new DropDownBoxTool.Callback() {
                     @Override
                     public void complate(String key, String value) {
+                        if(membersNum.get(key)>0)
+                        {
+                            ToastShowTool.myToastShort(GiftMoneyAddAct.this,"该组下未有亲友！");
+                            isGetGroupMembering=false;
+                            return ;
+                        }
                         Map<String, String> params = ComParamsAddTool.getParam();
                         params.put("userid", FtpApplication.user.getId());
                         params.put("gourpid", key);

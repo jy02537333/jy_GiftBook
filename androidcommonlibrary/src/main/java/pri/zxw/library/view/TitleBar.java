@@ -103,6 +103,10 @@ public final class TitleBar extends LinearLayout {
     public void setRightVisibility(int visibility) {
         rightTv.setVisibility(visibility);
     }
+    public void setRightDrawable(Drawable left,Drawable top,Drawable right,Drawable bottom)
+    {
+        rightTv.setCompoundDrawables(left,top,right,bottom);
+    }
 
     public void setLeftVisibility(int visibility) {
         findViewById(R.id.title_left_lay).setVisibility(visibility);

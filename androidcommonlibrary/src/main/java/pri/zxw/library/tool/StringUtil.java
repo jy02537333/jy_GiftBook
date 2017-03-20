@@ -57,4 +57,13 @@ public class StringUtil {
 		}
 		return false;
 	}
+	public static boolean isNotEmpty(String str,boolean is)
+	{
+		if(str!=null&&str.trim().length()>0)
+		{
+			return true;
+		}
+		else
+			return  false;
+	}
 }

@@ -22,21 +22,21 @@ public class LoginlogEntity extends BaseEntity implements java.io.Serializable {
 	/**用户id*/
 	private String userid;
 	/**登录时间*/
-	private java.util.Date logindate;
+	private Long logindate;
 	/**上次登录时间*/
-	private java.util.Date lastlogindate;
+	private Long lastlogindate;
 	/**登录token*/
 	private String logintoken;
 	/**设备编号*/
 	private String device;
 	/**创建时间*/
-	private java.util.Date createDate;
+	private Long createDate;
 //	/**创建人编号*/
 //	private String createBy;
 //	/**创建人姓名*/
 //	private String createName;
 //	/**更新时间*/
-//	private java.util.Date updateDate;
+//	private Long updateDate;
 //	/**更新人编号*/
 //	private String updateBy;
 //	/**更信任姓名*/
@@ -73,33 +73,33 @@ public class LoginlogEntity extends BaseEntity implements java.io.Serializable {
 		this.userid = userid;
 	}
 	/**
-	 *方法: 取得java.util.Date
-	 *@return: java.util.Date  登录时间
+	 *方法: 取得Long
+	 *@return: Long  登录时间
 	 */
-	public java.util.Date getLogindate(){
+	public Long getLogindate(){
 		return this.logindate;
 	}
 
 	/**
-	 *方法: 设置java.util.Date
-	 *@param: java.util.Date  登录时间
+	 *方法: 设置Long
+	 *@param: Long  登录时间
 	 */
-	public void setLogindate(java.util.Date logindate){
+	public void setLogindate(Long logindate){
 		this.logindate = logindate;
 	}
 	/**
-	 *方法: 取得java.util.Date
-	 *@return: java.util.Date  上次登录时间
+	 *方法: 取得Long
+	 *@return: Long  上次登录时间
 	 */
-	public java.util.Date getLastlogindate(){
+	public Long getLastlogindate(){
 		return this.lastlogindate;
 	}
 
 	/**
-	 *方法: 设置java.util.Date
-	 *@param: java.util.Date  上次登录时间
+	 *方法: 设置Long
+	 *@param: Long  上次登录时间
 	 */
-	public void setLastlogindate(java.util.Date lastlogindate){
+	public void setLastlogindate(Long lastlogindate){
 		this.lastlogindate = lastlogindate;
 	}
 	/**
@@ -133,18 +133,18 @@ public class LoginlogEntity extends BaseEntity implements java.io.Serializable {
 		this.device = device;
 	}
 	/**
-	 *方法: 取得java.util.Date
-	 *@return: java.util.Date  创建时间
+	 *方法: 取得Long
+	 *@return: Long  创建时间
 	 */
-	public java.util.Date getCreateDate(){
+	public Long getCreateDate(){
 		return this.createDate;
 	}
 
 	/**
-	 *方法: 设置java.util.Date
-	 *@param: java.util.Date  创建时间
+	 *方法: 设置Long
+	 *@param: Long  创建时间
 	 */
-	public void setCreateDate(java.util.Date createDate){
+	public void setCreateDate(Long createDate){
 		this.createDate = createDate;
 	}
 //	/**
@@ -178,18 +178,18 @@ public class LoginlogEntity extends BaseEntity implements java.io.Serializable {
 //		this.createName = createName;
 //	}
 //	/**
-//	 *方法: 取得java.util.Date
-//	 *@return: java.util.Date  更新时间
+//	 *方法: 取得Long
+//	 *@return: Long  更新时间
 //	 */
-//	public java.util.Date getUpdateDate(){
+//	public Long getUpdateDate(){
 //		return this.updateDate;
 //	}
 //
 //	/**
-//	 *方法: 设置java.util.Date
-//	 *@param: java.util.Date  更新时间
+//	 *方法: 设置Long
+//	 *@param: Long  更新时间
 //	 */
-//	public void setUpdateDate(java.util.Date updateDate){
+//	public void setUpdateDate(Long updateDate){
 //		this.updateDate = updateDate;
 //	}
 //	/**

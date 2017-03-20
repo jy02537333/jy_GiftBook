@@ -5,16 +5,19 @@
     android:orientation="vertical">
     <!-- 首页流水账 -->
     <RelativeLayout
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="5dp"
+        android:id="@+id/item_list_f_home_journal_account_content"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:background="@color/white"
         android:layout_width="match_parent"
-        android:layout_height="45dp">
+        android:layout_height="55dp">
 
         <ImageView
             android:id="@+id/item_list_f_home_journal_account_alt_img"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_centerVertical="true"
+            android:visibility="gone"
             android:src="@mipmap/plus_alt" />
         <LinearLayout
             android:layout_marginLeft="10dp"
@@ -22,30 +25,31 @@
             android:layout_height="match_parent"
             android:layout_toRightOf="@+id/item_list_f_home_journal_account_alt_img"
             android:orientation="horizontal">
+            <TextView
+                android:id="@+id/item_list_f_home_journal_account_name_tv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:textColor="@color/com_font_black"
+                android:text="姓名" />
         <TextView
             android:id="@+id/item_list_f_home_journal_account_fee_tv"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:textColor="@color/com_font_money_red"
             android:gravity="center"
-            android:background="@drawable/shape_layout_left_border"
             android:text="800" />
 
-        <TextView
-            android:id="@+id/item_list_f_home_journal_account_name_tv"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:background="@drawable/shape_layout_right_border"
-            android:text="姓名" />
+
             <TextView
                 android:id="@+id/item_list_f_home_journal_account_type_tv"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:gravity="center"
-                android:background="@drawable/shape_layout_right_border"
+                android:textColor="@color/com_font_black"
                 android:text="结婚" />
             <TextView
                 android:id="@+id/item_list_f_home_journal_account_date_tv"
@@ -53,8 +57,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1.5"
                 android:gravity="center"
-                android:background="@drawable/shape_layout_right_border"
-                android:text="2016/01/01" />
+                android:text="2016.01.01" />
         </LinearLayout>
     </RelativeLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_below="@+id/item_list_f_home_journal_account_content"
+        android:background="@color/com_line_color"/>
 </RelativeLayout>
