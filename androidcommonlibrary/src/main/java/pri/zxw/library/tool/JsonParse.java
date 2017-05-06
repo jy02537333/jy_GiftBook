@@ -78,10 +78,13 @@ public class JsonParse {
 		JSONObject jsonObj = new JSONObject(data);
 		Map<String, String> map = new HashMap<String, String>();
 		if(data.indexOf(CONTEXT)!=-1)
-		map.put(CONTEXT, jsonObj.getString(CONTEXT)); // 返回内容
-		map.put(STATUS, jsonObj.getString(STATUS)); // 状�?
-		map.put(MSG, jsonObj.getString(MSG)); // 消息
-		map.put(SUM_COUNT, jsonObj.getString(SUM_COUNT)); // 消息
+			map.put(CONTEXT, jsonObj.getString(CONTEXT)); // 返回内容
+		if(data.indexOf(STATUS)!=-1)
+			map.put(STATUS, jsonObj.getString(STATUS)); // 状�?
+		if(data.indexOf(MSG)!=-1)
+			map.put(MSG, jsonObj.getString(MSG)); // 消息
+		if(data.indexOf(SUM_COUNT)!=-1)
+			map.put(SUM_COUNT, jsonObj.getString(SUM_COUNT)); // 消息
 		return map;
 	}
 

@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.Comparator;
 import java.util.concurrent.RejectedExecutionException;
 
-import pri.zxw.library.tool.ImageCache;
+import pri.zxw.library.tool.ImgLoad.ImageCache;
 
 import android.content.Context;
 import android.graphics.Bitmap;

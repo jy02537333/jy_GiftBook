@@ -35,6 +35,7 @@ android {
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     compile project(':android-pulltorefresh-library')
+
     compile project(':mysetting')
     compile project(':librarystore')
 }

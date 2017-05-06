@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pri.zxw.library.entity.User;
-import pri.zxw.library.tool.ImageLoadTool;
+import pri.zxw.library.tool.ImgLoad.ImageLoadTool;
 import pri.zxw.library.view.CircleImageView;
 import pri.zxw.library.view.TitleBar;
 import pri.zxw.mysetting.MySettingInfo;

@@ -15,7 +15,7 @@ import java.util.List;
 
 import pri.zxw.library.base.MyBaseAdapter;
 import pri.zxw.library.tool.DateCommon;
-import pri.zxw.library.tool.ImgLoadMipmapTool;
+import pri.zxw.library.tool.ImgLoad.ImgLoadMipmapTool;
 
 /**
  * 首页礼金记录适配器

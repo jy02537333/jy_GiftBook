@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-import pri.zxw.library.tool.ImageUtil;
+import pri.zxw.library.tool.ImgLoad.ImageUtil;
 
 
 import pri.zxw.library.tool.NetUtil;

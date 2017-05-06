@@ -22,6 +22,8 @@ public class GroupmemberEntity extends BaseEntity implements java.io.Serializabl
 	private String id;
 	/**组id*/
 	private String gourpid;
+	/**组名称*/
+	private String gourpName;
 	/**组成员姓名*/
 	private String groupmember;
 	/**总金额*/
@@ -126,6 +128,22 @@ public class GroupmemberEntity extends BaseEntity implements java.io.Serializabl
 	public void setGourpid(String gourpid){
 		this.gourpid = gourpid;
 	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  组id
+	 */
+	public String getGourpName(){
+		return this.gourpName;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  组id
+	 */
+	public void setGourpName(String gourpName){
+		this.gourpName = gourpName;
+	}
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  组成员姓名

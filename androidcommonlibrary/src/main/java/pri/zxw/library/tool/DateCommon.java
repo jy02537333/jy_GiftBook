@@ -286,6 +286,24 @@ public class DateCommon {
 		Date date=new Date(dateL);
 		return sdf.format(date);
 	}
+	/**
+	 * 获取当前时间作文件名称
+	 * @return
+	 */
+	public final static  String getDateFileName()
+	{
+
+			StringBuffer sBuffer = new StringBuffer();
+			Calendar cal = Calendar.getInstance();
+			int hour = cal.get(Calendar.HOUR_OF_DAY);
+			int minute = cal.get(Calendar.MINUTE);
+			int second = cal.get(Calendar.SECOND);
+			int mm = cal.get(Calendar.MILLISECOND);
+
+			sBuffer.append(cal.get(Calendar.YEAR)).append(cal.get(Calendar.MONTH)+1).append(cal.get(Calendar.DAY_OF_MONTH))
+					.append(hour).append(minute).append(second).append(mm);
+			return sBuffer.toString();
+	}
 	
 	
 	

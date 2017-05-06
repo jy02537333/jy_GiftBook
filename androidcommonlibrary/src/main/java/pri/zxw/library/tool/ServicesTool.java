@@ -29,6 +29,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 import pri.zxw.library.entity.FileByteEntity;
 import pri.zxw.library.entity.FileEntity;
+import pri.zxw.library.myinterface.IServicesCallback;
 
 
 /**
@@ -133,11 +134,14 @@ public abstract class ServicesTool {
 		doGetAndalysisData(subUrl, param, requestCode);
 	}
 
-	public void doGetAndalysisData(String subUrl, Map<String, String> param,
-								   final int requestCode) {
-
+	public void doGetAndalysisDataCall(String subUrl, Map<String, String> param,
+								   final int requestCode,final IServicesCallback servicesCallback) {
 		if (baseUrl == null || subUrl == null) {
 			return;
+		}
+		if(servicesCallback!=null)
+		{
+			servicesCallback.onStart();
 		}
 		initProperty(subUrl, param, requestCode);
 		OkHttpUtils.get()
@@ -148,12 +152,25 @@ public abstract class ServicesTool {
 					@Override
 					public void onError(Call call, Exception error, int id) {
 						failureHandler(call,error, requestCode, null);
+						if(servicesCallback!=null)
+						{
+							servicesCallback.onEnd();
+						}
 					}
 					@Override
 					public void onResponse(String response, int id) {
 						responseHandler(response, requestCode);
+						if(servicesCallback!=null)
+						{
+							servicesCallback.onEnd();
+						}
 					}
 				});
+
+	}
+	public void doGetAndalysisData(String subUrl, Map<String, String> param,
+								   final int requestCode) {
+		doGetAndalysisDataCall(subUrl,param,requestCode,null);
 	}
 
 
@@ -172,12 +189,14 @@ public abstract class ServicesTool {
 		doPostAndalysisData(subUrl, param, requestCode);
 	}
 
-	public void doPostAndalysisData(String subUrl, Map<String, String> param,
-									final int requestCode) {
+	public void doPostAndalysisDataCall(String subUrl, Map<String, String> param,
+									final int requestCode,final IServicesCallback servicesCallback) {
 		if (baseUrl == null || subUrl == null) {
 			return;
 		}
 		initProperty(subUrl, param, requestCode);
+		if(servicesCallback!=null)
+			servicesCallback.onStart();
 		OkHttpUtils.post()
 				.url(baseUrl + subUrl)
 				.params(param)
@@ -186,12 +205,20 @@ public abstract class ServicesTool {
 					@Override
 					public void onError(Call call, Exception error, int id) {
 						failureHandler(call,error, requestCode, null);
+						if(servicesCallback!=null)
+							servicesCallback.onEnd();
 					}
 					@Override
 					public void onResponse(String response, int id) {
 						responseHandler(response, requestCode);
+						if(servicesCallback!=null)
+							servicesCallback.onEnd();
 					}
 				});
+	}
+	public void doPostAndalysisData(String subUrl, Map<String, String> param,
+									final int requestCode) {
+		doPostAndalysisDataCall(subUrl,param,requestCode,null);
 	}
 
 	/**
@@ -317,9 +344,9 @@ public abstract class ServicesTool {
 					{
 						tokenVerifyCallback(mContext);
 					}
-					if(map.get(JsonParse.CONTEXT).equals("null"))
+					if(map.containsKey(JsonParse.CONTEXT)&& map.get(JsonParse.CONTEXT).equals("null"))
 						map.put(JsonParse.CONTEXT,"");
-					if(map.get(JsonParse.SUM_COUNT).equals("null"))
+					if(map.containsKey(JsonParse.SUM_COUNT)&&map.get(JsonParse.SUM_COUNT).equals("null"))
 						map.put(JsonParse.SUM_COUNT,"");
 					msg.obj = map;
 				} else

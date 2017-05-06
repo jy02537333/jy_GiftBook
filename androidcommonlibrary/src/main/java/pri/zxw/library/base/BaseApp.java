@@ -13,7 +13,7 @@ import pri.zxw.library.entity.AppPropertyInfo;
 import pri.zxw.library.entity.User;
 import pri.zxw.library.tool.ClearActivityTool;
 import pri.zxw.library.tool.DeviceTool;
-import pri.zxw.library.tool.ImageLoadTool;
+import pri.zxw.library.tool.ImgLoad.ImageLoadTool;
 import pri.zxw.library.tool.SharedSaveUserTool;
 
 /**

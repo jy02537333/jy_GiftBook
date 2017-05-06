@@ -90,6 +90,21 @@
         <activity android:name=".Activity.GroupMemberAct"
             android:screenOrientation="portrait">
         </activity>
+        <activity android:name=".Activity.AffairEditAct"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".Activity.contact.ContactListActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".Activity.contact.ContactListSelectActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="me.nereo.multi_image_selector.utils.choosepic.BitmapCache"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name="me.nereo.multi_image_selector.utils.choosepic.GalleryActivity"
+            android:screenOrientation="portrait">
+        </activity>
         <!--    -->
         <activity android:name=".view.time_picker.DatePickerWindow"
             android:screenOrientation="portrait">

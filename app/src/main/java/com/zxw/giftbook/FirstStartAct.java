@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import pri.zxw.library.base.MyBaseActivity;
-import pri.zxw.library.tool.ImgLoadMipmapTool;
+import pri.zxw.library.tool.ImgLoad.ImgLoadMipmapTool;
 import pri.zxw.library.tool.ProgressDialogTool;
 
 public class FirstStartAct extends MyBaseActivity  implements OnPageChangeListener {

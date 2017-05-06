@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import pri.zxw.library.base.MyBaseActivity;
-import pri.zxw.library.tool.ImgLoadMipmapTool;
+import pri.zxw.library.tool.ImgLoad.ImgLoadMipmapTool;
 import pri.zxw.library.tool.ProgressDialogTool;
 import pri.zxw.library.tool.ServicesTool;
 import pri.zxw.library.tool.SharedpreferencesTool;

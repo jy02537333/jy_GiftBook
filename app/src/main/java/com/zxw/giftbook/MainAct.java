@@ -22,6 +22,7 @@ import pri.zxw.library.entity.User;
 import pri.zxw.library.tool.AppConstantError;
 import pri.zxw.library.tool.ProgressDialogTool;
 
+import com.zxw.giftbook.Activity.AffairEditAct;
 import com.zxw.giftbook.Activity.menu.FinancialFragment;
 import com.zxw.giftbook.Activity.menu.MyFragment;
 import com.zxw.giftbook.Activity.menu.HomeFragment;
@@ -106,7 +107,7 @@ public class MainAct extends MyBaseActivity {
         initView();
         initTool();
         initData();
-
+ startActivity(new Intent(this, AffairEditAct.class));
 
     }
 

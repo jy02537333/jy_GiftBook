@@ -135,7 +135,6 @@ public class MyApplication extends Application implements Thread.UncaughtExcepti
 	/**
 	 * 关闭其他activity，留下一个特定的activity
 	 * 
-	 * @param act
 	 */
 	public void ClearOtherActityLeavingAct(Class<Activity> actClass) {
 		ClearActivityTool.ClearOtherActityLeavingAct(activityList, actClass);
@@ -144,7 +143,6 @@ public class MyApplication extends Application implements Thread.UncaughtExcepti
 	/**
 	 * 关闭其他activity，留下一个特定的activity
 	 * 
-	 * @param act
 	 */
 	public void ClearOtherActityLeavingAct() {
 		ClearActivityTool.ClearOtherActityLeavingAct(activityList, null);

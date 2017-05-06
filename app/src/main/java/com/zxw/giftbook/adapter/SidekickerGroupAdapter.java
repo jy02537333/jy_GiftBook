@@ -21,7 +21,7 @@ import java.util.List;
 
 import pri.zxw.library.base.MyBaseAdapter;
 import pri.zxw.library.listener.TxtLengthRestrictTool;
-import pri.zxw.library.tool.ImgLoadMipmapTool;
+import pri.zxw.library.tool.ImgLoad.ImgLoadMipmapTool;
 import pri.zxw.library.tool.MyAlertDialog;
 
 /**

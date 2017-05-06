@@ -74,4 +74,36 @@
         <item name="android:paddingTop">5dp</item>
         <item name="android:paddingBottom">5dp</item>
     </style>
+    <!-- 单行输入框的公共样式 -->
+    <style name="et_style_commonal_single">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/select_bg_edittext</item>
+        <item name="android:textColorHint">@color/com_hint_font_gray_color</item>
+        <item name="android:layout_height">34dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textSize">@dimen/h6</item>
+    </style>
+
+    <!-- 单行输入框的公共样式 -->
+    <style name="et_style_commonal_single_height_30">
+        <item name="android:paddingLeft">3dp</item>
+        <item name="android:paddingRight">3dp</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/select_bg_edittext</item>
+        <item name="android:textColorHint">@color/com_hint_font_gray_color</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:textSize">@dimen/h6</item>
+    </style>
+
+    <!-- 多行输入框的公共样式 -->
+    <style name="et_style_commonal_multiple">
+        <item name="android:padding">6dp</item>
+        <item name="android:background">@drawable/select_bg_edittext</item>
+        <item name="android:textColorHint">@color/com_hint_font_gray_color</item>
+        <item name="android:textSize">@dimen/h6</item>
+        <item name="android:gravity">left|top</item>
+    </style>
 </resources>

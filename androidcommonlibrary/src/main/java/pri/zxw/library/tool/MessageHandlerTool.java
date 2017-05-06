@@ -97,7 +97,6 @@ public class MessageHandlerTool {
 	/**
 	 *
 	 * @param msg
-	 * @return type的对象
 	 */
 	public String handlerData(Message msg,Context context) {
 		if (msg.arg1 == 1) {
