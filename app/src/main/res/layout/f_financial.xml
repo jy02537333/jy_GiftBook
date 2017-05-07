@@ -9,8 +9,13 @@
         android:layout_height="wrap_content"
         titleBarStyle:text="金融超市"
         titleBarStyle:left_visibility="gone" />
-<WebView
-    android:id="@+id/f_financial_wv"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"></WebView>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/f_financial_SwipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+            <WebView
+                android:id="@+id/f_financial_wv"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></WebView>
+    </android.support.v4.widget.SwipeRefreshLayout>
 </LinearLayout>

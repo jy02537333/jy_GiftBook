@@ -107,7 +107,7 @@ public class MainAct extends MyBaseActivity {
         initView();
         initTool();
         initData();
- startActivity(new Intent(this, AffairEditAct.class));
+// startActivity(new Intent(this, AffairEditAct.class));
 
     }
 
@@ -181,7 +181,8 @@ public class MainAct extends MyBaseActivity {
             public void onClick(View v) {
                 // TODO Auto-generated method stub
                 int id = v.getId();
-                radioCanelCheck(id, R.mipmap.tab_sidekicker_group_p);
+//                radioCanelCheck(id, R.mipmap.tab_financial_p);
+                radioCanelCheck(id, R.mipmap.tab_receive_p);
                 if (financialFragment == null)
                 {
                     financialFragment = new FinancialFragment();
